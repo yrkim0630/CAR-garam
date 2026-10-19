@@ -1,0 +1,2688 @@
+/* ==========================================================================
+   THE JOURNEY OF MOBILITY - DESIGN SYSTEM & STYLESHEET
+   자동차의 역사와 작동원리 프리미엄 웹 플랫폼
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Outfit:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600;700&display=swap');
+
+:root {
+  /* Color Palette */
+  --bg-dark: #07090e;
+  --bg-surface: #0e121b;
+  --bg-card: rgba(18, 24, 38, 0.75);
+  --bg-card-hover: rgba(26, 34, 54, 0.9);
+  --bg-glass: rgba(12, 16, 26, 0.85);
+
+  --border-subtle: rgba(255, 255, 255, 0.07);
+  --border-bright: rgba(0, 240, 255, 0.35);
+  --border-focus: #00f0ff;
+
+  --text-main: #f1f5f9;
+  --text-muted: #94a3b8;
+  --text-dim: #64748b;
+
+  /* Accent Colors */
+  --neon-cyan: #00f0ff;
+  --neon-cyan-glow: rgba(0, 240, 255, 0.25);
+  --speed-red: #ff3366;
+  --speed-red-glow: rgba(255, 51, 102, 0.3);
+  --electric-blue: #3b82f6;
+  --electric-blue-glow: rgba(59, 130, 246, 0.3);
+  --amber-gold: #ffb703;
+  --amber-glow: rgba(255, 183, 3, 0.25);
+  --eco-green: #10b981;
+
+  /* Gradients */
+  --gradient-cyan-blue: linear-gradient(135deg, #00f0ff 0%, #3b82f6 100%);
+  --gradient-red-orange: linear-gradient(135deg, #ff3366 0%, #ff8c42 100%);
+  --gradient-dark-radial: radial-gradient(circle at 50% 0%, rgba(0, 240, 255, 0.12) 0%, transparent 70%);
+  --gradient-glass: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.01) 100%);
+
+  /* Typography */
+  --font-display: 'Outfit', 'Noto Sans KR', sans-serif;
+  --font-body: 'Noto Sans KR', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  /* Transitions & Shadows */
+  --transition-fast: 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-smooth: 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  --shadow-card: 0 10px 30px -10px rgba(0, 0, 0, 0.6);
+  --shadow-neon-cyan: 0 0 25px rgba(0, 240, 255, 0.35);
+  --shadow-neon-red: 0 0 25px rgba(255, 51, 102, 0.35);
+
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-full: 9999px;
+}
+
+/* Reset & Base Styles */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+  color-scheme: dark;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--bg-dark);
+  color: var(--text-main);
+  line-height: 1.65;
+  overflow-x: hidden;
+  background-image: 
+    radial-gradient(circle at 15% 20%, rgba(0, 240, 255, 0.04) 0%, transparent 40%),
+    radial-gradient(circle at 85% 60%, rgba(255, 51, 102, 0.04) 0%, transparent 45%),
+    linear-gradient(to bottom, #07090e, #0c101a);
+  background-attachment: fixed;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-dark);
+}
+::-webkit-scrollbar-thumb {
+  background: #1e293b;
+  border-radius: 4px;
+  border: 2px solid var(--bg-dark);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--neon-cyan);
+}
+
+/* Container */
+.container {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* Top Progress Bar */
+#scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  background: var(--gradient-cyan-blue);
+  width: 0%;
+  z-index: 1000;
+  box-shadow: 0 0 10px var(--neon-cyan);
+  transition: width 0.1s ease;
+}
+
+/* Navigation Bar */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 72px;
+  background: var(--bg-glass);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border-bottom: 1px solid var(--border-subtle);
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  transition: var(--transition-smooth);
+}
+
+.nav-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: var(--text-main);
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1.25rem;
+  letter-spacing: -0.5px;
+}
+
+.logo-icon {
+  width: 38px;
+  height: 38px;
+  background: var(--gradient-cyan-blue);
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 15px var(--neon-cyan-glow);
+  color: #07090e;
+  font-size: 1.2rem;
+}
+
+.logo-badge {
+  font-size: 0.7rem;
+  font-weight: 700;
+  background: rgba(0, 240, 255, 0.12);
+  color: var(--neon-cyan);
+  padding: 2px 8px;
+  border-radius: var(--radius-full);
+  border: 1px solid rgba(0, 240, 255, 0.3);
+  text-transform: uppercase;
+  margin-left: 4px;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  gap: 28px;
+}
+
+.nav-link {
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: var(--transition-fast);
+  position: relative;
+  padding: 6px 0;
+}
+
+.nav-link:hover, .nav-link.active {
+  color: var(--neon-cyan);
+}
+
+.nav-link.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: var(--neon-cyan);
+  box-shadow: 0 0 8px var(--neon-cyan);
+}
+
+.nav-cta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.btn-nav-action {
+  background: rgba(0, 240, 255, 0.1);
+  color: var(--neon-cyan);
+  border: 1px solid rgba(0, 240, 255, 0.4);
+  padding: 8px 18px;
+  border-radius: var(--radius-full);
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  transition: var(--transition-smooth);
+}
+
+.btn-nav-action:hover {
+  background: var(--neon-cyan);
+  color: #07090e;
+  box-shadow: 0 0 20px rgba(0, 240, 255, 0.45);
+}
+
+/* Mobile Menu Toggle */
+.mobile-toggle {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--text-main);
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+/* Hero Section */
+.hero-section {
+  position: relative;
+  padding: 160px 0 100px;
+  min-height: 90vh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+.hero-canvas-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.45;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.hero-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(0, 240, 255, 0.08);
+  border: 1px solid rgba(0, 240, 255, 0.25);
+  color: var(--neon-cyan);
+  padding: 6px 18px;
+  border-radius: var(--radius-full);
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  margin-bottom: 24px;
+  animation: pulseGlow 3s infinite;
+}
+
+.hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, 5.5vw, 4.2rem);
+  font-weight: 900;
+  line-height: 1.15;
+  margin-bottom: 24px;
+  letter-spacing: -1px;
+}
+
+.hero-title .gradient-text {
+  background: linear-gradient(135deg, #ffffff 20%, #00f0ff 65%, #3b82f6 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.hero-desc {
+  font-size: 1.15rem;
+  color: var(--text-muted);
+  max-width: 720px;
+  margin: 0 auto 40px;
+  line-height: 1.75;
+}
+
+.hero-actions {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 60px;
+}
+
+.btn-primary {
+  background: var(--gradient-cyan-blue);
+  color: #07090e;
+  padding: 14px 32px;
+  border-radius: var(--radius-full);
+  font-size: 1rem;
+  font-weight: 700;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  transition: var(--transition-smooth);
+  box-shadow: 0 0 25px rgba(0, 240, 255, 0.35);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 35px rgba(0, 240, 255, 0.6);
+}
+
+.btn-secondary {
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text-main);
+  padding: 14px 30px;
+  border-radius: var(--radius-full);
+  font-size: 1rem;
+  font-weight: 600;
+  text-decoration: none;
+  border: 1px solid var(--border-subtle);
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  transition: var(--transition-smooth);
+}
+
+.btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+/* Hero Stats Bar */
+.hero-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  background: var(--bg-card);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 24px 32px;
+  box-shadow: var(--shadow-card);
+}
+
+.stat-item {
+  text-align: center;
+}
+
+.stat-number {
+  font-family: var(--font-display);
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: var(--neon-cyan);
+  line-height: 1.1;
+  margin-bottom: 4px;
+}
+
+.stat-label {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+/* Section Header Component */
+.section-header {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto 60px;
+}
+
+.section-badge {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--neon-cyan);
+  background: rgba(0, 240, 255, 0.08);
+  border: 1px solid rgba(0, 240, 255, 0.25);
+  padding: 4px 14px;
+  border-radius: var(--radius-full);
+  margin-bottom: 16px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 3.5vw, 2.8rem);
+  font-weight: 800;
+  line-height: 1.25;
+  margin-bottom: 18px;
+}
+
+.section-desc {
+  font-size: 1.05rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+
+/* Sections Global */
+section {
+  padding: 100px 0;
+  position: relative;
+}
+
+/* --------------------------------------------------------------------------
+   SECTION 1: 자동차의 위대한 역사 (TIMELINE)
+   -------------------------------------------------------------------------- */
+.history-section {
+  border-top: 1px solid var(--border-subtle);
+}
+
+.history-banner {
+  position: relative;
+  width: 100%;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  margin-bottom: 50px;
+  border: 1px solid var(--border-subtle);
+  box-shadow: var(--shadow-card);
+}
+
+.history-banner img {
+  width: 100%;
+  height: 380px;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.6s ease;
+}
+
+.history-banner:hover img {
+  transform: scale(1.02);
+}
+
+.history-banner-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(to top, rgba(7, 9, 14, 0.95) 10%, transparent 100%);
+  padding: 40px 32px 24px;
+}
+
+.history-banner-caption {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 6px;
+}
+
+.history-banner-sub {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+/* Era Filters */
+.era-filters {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 50px;
+}
+
+.era-filter-btn {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-muted);
+  padding: 10px 20px;
+  border-radius: var(--radius-full);
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+.era-filter-btn:hover {
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.era-filter-btn.active {
+  background: rgba(0, 240, 255, 0.15);
+  color: var(--neon-cyan);
+  border-color: var(--neon-cyan);
+  box-shadow: 0 0 15px rgba(0, 240, 255, 0.2);
+}
+
+/* Timeline Layout */
+.timeline {
+  position: relative;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.timeline::after {
+  content: '';
+  position: absolute;
+  width: 2px;
+  background: linear-gradient(to bottom, var(--neon-cyan), var(--electric-blue), var(--speed-red));
+  top: 20px;
+  bottom: 20px;
+  left: 50%;
+  margin-left: -1px;
+}
+
+.timeline-item {
+  padding: 10px 40px;
+  position: relative;
+  width: 50%;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.timeline-item.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.timeline-item.left {
+  left: 0;
+  text-align: right;
+}
+
+.timeline-item.right {
+  left: 50%;
+  text-align: left;
+}
+
+.timeline-node {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background: var(--bg-dark);
+  border: 3px solid var(--neon-cyan);
+  top: 28px;
+  border-radius: 50%;
+  z-index: 2;
+  box-shadow: 0 0 12px var(--neon-cyan);
+}
+
+.timeline-item.left .timeline-node {
+  right: -10px;
+}
+
+.timeline-item.right .timeline-node {
+  left: -10px;
+}
+
+.timeline-card {
+  background: var(--bg-card);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 24px;
+  box-shadow: var(--shadow-card);
+  transition: var(--transition-smooth);
+}
+
+.timeline-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(0, 240, 255, 0.4);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5), 0 0 15px rgba(0, 240, 255, 0.15);
+}
+
+.timeline-item.right .timeline-card {
+  text-align: left;
+}
+
+.timeline-year {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  color: var(--neon-cyan);
+  font-size: 0.95rem;
+  margin-bottom: 6px;
+  background: rgba(0, 240, 255, 0.1);
+  padding: 3px 10px;
+  border-radius: var(--radius-sm);
+}
+
+.timeline-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+  color: #fff;
+}
+
+.timeline-text {
+  font-size: 0.92rem;
+  color: var(--text-muted);
+  line-height: 1.65;
+  margin-bottom: 14px;
+}
+
+.timeline-tags {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.timeline-item.left .timeline-tags {
+  justify-content: flex-end;
+}
+
+.timeline-tag {
+  font-size: 0.75rem;
+  background: rgba(255, 255, 255, 0.05);
+  color: #cbd5e1;
+  padding: 2px 8px;
+  border-radius: var(--radius-sm);
+}
+
+.timeline-expand-btn {
+  background: none;
+  border: none;
+  color: var(--neon-cyan);
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 10px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 0;
+}
+
+.timeline-expand-btn:hover {
+  text-decoration: underline;
+}
+
+/* --------------------------------------------------------------------------
+   SECTION 2: 내연기관 4행정 시뮬레이터 (ENGINE SIMULATOR)
+   -------------------------------------------------------------------------- */
+.engine-section {
+  background: linear-gradient(to bottom, #0c101a, #07090e);
+  border-top: 1px solid var(--border-subtle);
+}
+
+.engine-sim-container {
+  display: grid;
+  grid-template-columns: 1.25fr 1fr;
+  gap: 36px;
+  align-items: center;
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 36px;
+  box-shadow: var(--shadow-card);
+}
+
+.engine-canvas-wrap {
+  position: relative;
+  background: #06090e;
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  overflow: hidden;
+  box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.8);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+
+#engineCanvas {
+  width: 100%;
+  max-width: 520px;
+  height: 480px;
+  display: block;
+}
+
+.engine-canvas-hud {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  right: 16px;
+  display: flex;
+  justify-content: space-between;
+  pointer-events: none;
+}
+
+.hud-pill {
+  background: rgba(14, 18, 27, 0.85);
+  backdrop-filter: blur(8px);
+  border: 1px solid var(--border-subtle);
+  padding: 6px 14px;
+  border-radius: var(--radius-full);
+  font-size: 0.8rem;
+  font-family: var(--font-mono);
+  color: var(--neon-cyan);
+}
+
+/* Engine Controls Panel */
+.engine-controls-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.stroke-steps-nav {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+}
+
+.stroke-btn {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-muted);
+  padding: 10px 8px;
+  border-radius: var(--radius-sm);
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+  text-align: center;
+  transition: var(--transition-fast);
+}
+
+.stroke-btn span.num {
+  display: block;
+  font-size: 0.7rem;
+  color: var(--text-dim);
+  margin-bottom: 2px;
+}
+
+.stroke-btn:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+}
+
+.stroke-btn.active {
+  background: rgba(0, 240, 255, 0.15);
+  border-color: var(--neon-cyan);
+  color: var(--neon-cyan);
+  box-shadow: 0 0 12px rgba(0, 240, 255, 0.25);
+}
+
+/* Stroke Live Info Card */
+.stroke-detail-card {
+  background: rgba(7, 9, 14, 0.6);
+  border: 1px solid rgba(0, 240, 255, 0.2);
+  border-radius: var(--radius-md);
+  padding: 20px;
+}
+
+.stroke-header-badge {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.stroke-title {
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: #fff;
+}
+
+.stroke-valve-status {
+  font-size: 0.8rem;
+  font-family: var(--font-mono);
+  padding: 3px 10px;
+  border-radius: var(--radius-sm);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.stroke-description {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+  margin-bottom: 16px;
+}
+
+.stroke-telemetry {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  padding-top: 14px;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.telemetry-item {
+  text-align: center;
+}
+
+.telemetry-val {
+  font-family: var(--font-mono);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--neon-cyan);
+}
+
+.telemetry-label {
+  font-size: 0.75rem;
+  color: var(--text-dim);
+}
+
+/* Simulator Playback Bar */
+.sim-playback-bar {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: rgba(255, 255, 255, 0.03);
+  padding: 14px 18px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-subtle);
+}
+
+.btn-icon-control {
+  background: var(--neon-cyan);
+  color: #07090e;
+  border: none;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: var(--transition-fast);
+  box-shadow: 0 0 15px rgba(0, 240, 255, 0.3);
+  flex-shrink: 0;
+}
+
+.btn-icon-control:hover {
+  transform: scale(1.05);
+}
+
+.slider-group {
+  flex-grow: 1;
+}
+
+.slider-label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.82rem;
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: var(--text-muted);
+}
+
+.custom-range {
+  width: 100%;
+  accent-color: var(--neon-cyan);
+  cursor: pointer;
+}
+
+/* Deep Dive Mechanics Grid */
+.mechanics-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-top: 50px;
+}
+
+.mechanic-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 28px;
+  transition: var(--transition-smooth);
+}
+
+.mechanic-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(0, 240, 255, 0.3);
+  box-shadow: var(--shadow-card);
+}
+
+.mechanic-icon {
+  width: 50px;
+  height: 50px;
+  background: rgba(0, 240, 255, 0.08);
+  border: 1px solid rgba(0, 240, 255, 0.2);
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  color: var(--neon-cyan);
+  margin-bottom: 20px;
+}
+
+.mechanic-card h3 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+  color: #fff;
+}
+
+.mechanic-card p {
+  font-size: 0.92rem;
+  color: var(--text-muted);
+  line-height: 1.65;
+}
+
+/* --------------------------------------------------------------------------
+   SECTION 3: 구동계 & 섀시 메커니즘 (DRIVETRAIN & CHASSIS)
+   -------------------------------------------------------------------------- */
+.powertrain-section {
+  border-top: 1px solid var(--border-subtle);
+}
+
+.powertrain-banner {
+  width: 100%;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  margin-bottom: 40px;
+  border: 1px solid var(--border-subtle);
+  box-shadow: var(--shadow-card);
+}
+
+.powertrain-banner img {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+  display: block;
+}
+
+/* Powertrain Flowchart */
+.flowchart-container {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 32px;
+  margin-bottom: 40px;
+}
+
+.flowchart-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 24px;
+  text-align: center;
+  color: #fff;
+}
+
+.flowchart-steps {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.flow-node {
+  flex: 1;
+  min-width: 160px;
+  background: rgba(14, 18, 27, 0.9);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 20px 14px;
+  text-align: center;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+  position: relative;
+}
+
+.flow-node:hover, .flow-node.active {
+  border-color: var(--neon-cyan);
+  background: rgba(0, 240, 255, 0.08);
+  transform: translateY(-3px);
+  box-shadow: 0 0 20px rgba(0, 240, 255, 0.2);
+}
+
+.flow-node-num {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--neon-cyan);
+  margin-bottom: 4px;
+}
+
+.flow-node-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 4px;
+}
+
+.flow-node-desc {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+.flow-arrow {
+  color: var(--neon-cyan);
+  font-size: 1.2rem;
+  font-weight: 800;
+}
+
+/* Flow Node Dynamic Detail Box */
+#flowDetailBox {
+  margin-top: 24px;
+  background: rgba(7, 9, 14, 0.7);
+  border: 1px solid rgba(0, 240, 255, 0.25);
+  border-radius: var(--radius-md);
+  padding: 24px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.flow-detail-icon {
+  font-size: 2.2rem;
+  color: var(--neon-cyan);
+  background: rgba(0, 240, 255, 0.1);
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.flow-detail-content h4 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: #fff;
+}
+
+.flow-detail-content p {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+/* Differential & Braking Visuals */
+.chassis-features-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+}
+
+.chassis-feature-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 32px;
+}
+
+.chassis-feature-card h3 {
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.chassis-feature-card p {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+  margin-bottom: 20px;
+}
+
+.interactive-demo-box {
+  background: #07090e;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 20px;
+  text-align: center;
+}
+
+.differential-vis {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 20px 0;
+}
+
+.wheel-indicator {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.wheel-graphic {
+  width: 44px;
+  height: 80px;
+  background: #1e293b;
+  border: 2px solid #64748b;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.wheel-graphic::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 6px;
+  background: var(--neon-cyan);
+  animation: wheelRotate 1s linear infinite;
+}
+
+.wheel-label {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.wheel-rpm-badge {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--neon-cyan);
+  font-weight: 700;
+}
+
+.diff-center-box {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px dashed rgba(255, 255, 255, 0.2);
+  border-radius: var(--radius-sm);
+  padding: 12px 18px;
+}
+
+.diff-center-title {
+  font-size: 0.8rem;
+  font-family: var(--font-mono);
+  color: var(--amber-gold);
+}
+
+/* Steering Angle Selector */
+.turn-control-btns {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.turn-btn {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-muted);
+  padding: 6px 16px;
+  border-radius: var(--radius-full);
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+.turn-btn.active {
+  background: rgba(0, 240, 255, 0.15);
+  border-color: var(--neon-cyan);
+  color: var(--neon-cyan);
+}
+
+/* --------------------------------------------------------------------------
+   SECTION 4: 전기차(EV) 혁명 (ELECTRIC VEHICLE PLATFORM)
+   -------------------------------------------------------------------------- */
+.ev-section {
+  background: linear-gradient(to bottom, #07090e, #0c101a);
+  border-top: 1px solid var(--border-subtle);
+}
+
+.ev-banner {
+  width: 100%;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  margin-bottom: 40px;
+  border: 1px solid var(--border-subtle);
+  box-shadow: var(--shadow-card);
+}
+
+.ev-banner img {
+  width: 100%;
+  height: 420px;
+  object-fit: cover;
+  display: block;
+}
+
+/* EV 4 Core Components */
+.ev-core-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  margin-bottom: 50px;
+}
+
+.ev-core-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 24px;
+  position: relative;
+  overflow: hidden;
+  transition: var(--transition-smooth);
+}
+
+.ev-core-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: var(--neon-cyan);
+  opacity: 0;
+  transition: var(--transition-fast);
+}
+
+.ev-core-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(0, 240, 255, 0.35);
+}
+
+.ev-core-card:hover::before {
+  opacity: 1;
+}
+
+.ev-core-badge {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--neon-cyan);
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.ev-core-card h4 {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 10px;
+}
+
+.ev-core-card p {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+/* ICE vs EV Comparison Arena */
+.vs-arena-container {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 36px;
+  box-shadow: var(--shadow-card);
+}
+
+.vs-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.vs-header h3 {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 8px;
+}
+
+.vs-table-wrap {
+  overflow-x: auto;
+}
+
+.vs-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.vs-table th, .vs-table td {
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.vs-table th {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  font-weight: 600;
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.vs-table th.col-ice {
+  color: var(--speed-red);
+}
+
+.vs-table th.col-ev {
+  color: var(--neon-cyan);
+}
+
+.vs-table td {
+  font-size: 0.92rem;
+  color: var(--text-main);
+}
+
+.vs-table tr:hover td {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.efficiency-bar-container {
+  background: #1e293b;
+  border-radius: var(--radius-full);
+  height: 8px;
+  width: 100%;
+  margin-top: 6px;
+  overflow: hidden;
+}
+
+.efficiency-bar {
+  height: 100%;
+  border-radius: var(--radius-full);
+}
+
+.bar-ice {
+  background: var(--speed-red);
+  width: 25%;
+}
+
+.bar-ev {
+  background: var(--neon-cyan);
+  width: 88%;
+}
+
+/* --------------------------------------------------------------------------
+   SECTION 5: 미래 모빌리티와 자율주행 (FUTURE & AUTONOMOUS)
+   -------------------------------------------------------------------------- */
+.future-section {
+  border-top: 1px solid var(--border-subtle);
+}
+
+.autonomous-levels-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 12px;
+  margin-bottom: 40px;
+}
+
+.level-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 20px 14px;
+  text-align: center;
+  transition: var(--transition-fast);
+}
+
+.level-card:hover {
+  border-color: var(--neon-cyan);
+  transform: translateY(-3px);
+}
+
+.level-number {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--neon-cyan);
+  margin-bottom: 4px;
+}
+
+.level-title {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 8px;
+}
+
+.level-desc {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  line-height: 1.45;
+}
+
+.future-tech-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px;
+}
+
+.future-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 32px;
+}
+
+.future-card h3 {
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.future-card p {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+
+/* --------------------------------------------------------------------------
+   SECTION 6: 인터랙티브 엔지니어 랩 & 퀴즈 (LAB & QUIZ)
+   -------------------------------------------------------------------------- */
+.lab-section {
+  background: linear-gradient(to bottom, #0c101a, #07090e);
+  border-top: 1px solid var(--border-subtle);
+}
+
+.lab-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 40px;
+}
+
+.lab-tab-btn {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-muted);
+  padding: 12px 28px;
+  border-radius: var(--radius-full);
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+.lab-tab-btn:hover {
+  color: #fff;
+}
+
+.lab-tab-btn.active {
+  background: var(--gradient-cyan-blue);
+  color: #07090e;
+  border-color: transparent;
+  box-shadow: 0 0 20px rgba(0, 240, 255, 0.4);
+}
+
+.lab-pane {
+  display: none;
+}
+
+.lab-pane.active {
+  display: block;
+}
+
+/* Drivetrain Sandbox */
+.drivetrain-sandbox {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 36px;
+  box-shadow: var(--shadow-card);
+}
+
+.drive-options {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+  margin-bottom: 30px;
+}
+
+.drive-opt-btn {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-main);
+  padding: 16px;
+  border-radius: var(--radius-md);
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  text-align: center;
+  transition: var(--transition-fast);
+}
+
+.drive-opt-btn span.type {
+  display: block;
+  font-size: 0.8rem;
+  color: var(--neon-cyan);
+  margin-top: 4px;
+  font-weight: 500;
+}
+
+.drive-opt-btn:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.drive-opt-btn.active {
+  background: rgba(0, 240, 255, 0.15);
+  border-color: var(--neon-cyan);
+  box-shadow: 0 0 15px rgba(0, 240, 255, 0.25);
+}
+
+.drive-display-card {
+  background: #07090e;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 28px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+  align-items: center;
+}
+
+.car-chassis-diagram {
+  position: relative;
+  width: 240px;
+  height: 340px;
+  margin: 0 auto;
+  border: 3px solid #334155;
+  border-radius: 40px;
+  background: rgba(15, 23, 42, 0.5);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+.chassis-wheel {
+  position: absolute;
+  width: 22px;
+  height: 48px;
+  background: #1e293b;
+  border: 2px solid #64748b;
+  border-radius: 6px;
+}
+
+.wheel-fl { top: 30px; left: -14px; }
+.wheel-fr { top: 30px; right: -14px; }
+.wheel-rl { bottom: 30px; left: -14px; }
+.wheel-rr { bottom: 30px; right: -14px; }
+
+.chassis-wheel.powered {
+  border-color: var(--neon-cyan);
+  background: rgba(0, 240, 255, 0.25);
+  box-shadow: 0 0 15px var(--neon-cyan);
+}
+
+.chassis-engine-block {
+  position: absolute;
+  width: 80px;
+  height: 50px;
+  border-radius: 8px;
+  background: rgba(255, 51, 102, 0.2);
+  border: 2px solid var(--speed-red);
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--speed-red);
+}
+
+.engine-front { top: 40px; }
+.engine-mid { top: 140px; }
+.engine-rear { bottom: 40px; }
+
+.drive-specs-info h4 {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 12px;
+}
+
+.drive-specs-info p {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+  margin-bottom: 20px;
+}
+
+.drive-pros-cons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.pros-box, .cons-box {
+  background: rgba(255, 255, 255, 0.03);
+  padding: 14px;
+  border-radius: var(--radius-sm);
+  font-size: 0.85rem;
+}
+
+.pros-box h5 { color: var(--eco-green); margin-bottom: 6px; }
+.cons-box h5 { color: var(--speed-red); margin-bottom: 6px; }
+
+/* Interactive Quiz */
+.quiz-container {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 36px;
+  max-width: 800px;
+  margin: 0 auto;
+  box-shadow: var(--shadow-card);
+}
+
+.quiz-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.quiz-progress {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--neon-cyan);
+}
+
+.quiz-question-box h3 {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: #fff;
+  line-height: 1.4;
+  margin-bottom: 24px;
+}
+
+.quiz-options {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 28px;
+}
+
+.quiz-opt-btn {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-main);
+  padding: 16px 20px;
+  border-radius: var(--radius-md);
+  font-size: 0.95rem;
+  font-weight: 500;
+  text-align: left;
+  cursor: pointer;
+  transition: var(--transition-fast);
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.quiz-opt-btn:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.25);
+}
+
+.quiz-opt-btn.correct {
+  background: rgba(16, 185, 129, 0.15);
+  border-color: var(--eco-green);
+  color: #fff;
+}
+
+.quiz-opt-btn.wrong {
+  background: rgba(255, 51, 102, 0.15);
+  border-color: var(--speed-red);
+  color: #fff;
+}
+
+.quiz-feedback {
+  background: rgba(7, 9, 14, 0.8);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 18px;
+  margin-bottom: 20px;
+  display: none;
+  font-size: 0.92rem;
+  line-height: 1.6;
+}
+
+.quiz-feedback.show {
+  display: block;
+}
+
+.quiz-next-btn {
+  background: var(--gradient-cyan-blue);
+  color: #07090e;
+  border: none;
+  padding: 12px 28px;
+  border-radius: var(--radius-full);
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Quiz Score Card */
+.quiz-result-card {
+  text-align: center;
+  padding: 30px 10px;
+  display: none;
+}
+
+.quiz-result-badge {
+  font-size: 3.5rem;
+  margin-bottom: 16px;
+}
+
+.quiz-result-card h3 {
+  font-size: 1.8rem;
+  font-weight: 800;
+  margin-bottom: 12px;
+}
+
+.quiz-score-num {
+  font-family: var(--font-display);
+  font-size: 3rem;
+  font-weight: 900;
+  color: var(--neon-cyan);
+  margin-bottom: 14px;
+}
+
+/* --------------------------------------------------------------------------
+   SECTION 7: 용어 사전 & 검색 (GLOSSARY)
+   -------------------------------------------------------------------------- */
+.glossary-section {
+  border-top: 1px solid var(--border-subtle);
+}
+
+.glossary-search-wrap {
+  max-width: 600px;
+  margin: 0 auto 40px;
+  position: relative;
+}
+
+.glossary-search-input {
+  width: 100%;
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  color: #fff;
+  padding: 16px 24px 16px 48px;
+  border-radius: var(--radius-full);
+  font-size: 1rem;
+  outline: none;
+  transition: var(--transition-fast);
+}
+
+.glossary-search-input:focus {
+  border-color: var(--neon-cyan);
+  box-shadow: 0 0 20px rgba(0, 240, 255, 0.25);
+}
+
+.search-icon {
+  position: absolute;
+  left: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-dim);
+  font-size: 1.1rem;
+}
+
+.glossary-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.glossary-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 24px;
+  transition: var(--transition-smooth);
+}
+
+.glossary-card:hover {
+  border-color: rgba(0, 240, 255, 0.3);
+  transform: translateY(-3px);
+}
+
+.glossary-term {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--neon-cyan);
+  margin-bottom: 4px;
+}
+
+.glossary-en {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--text-dim);
+  margin-bottom: 12px;
+}
+
+.glossary-def {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+/* --------------------------------------------------------------------------
+   FOOTER
+   -------------------------------------------------------------------------- */
+.footer {
+  background: #040609;
+  border-top: 1px solid var(--border-subtle);
+  padding: 60px 0 30px;
+  color: var(--text-muted);
+}
+
+.footer-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 40px;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.footer-nav {
+  display: flex;
+  gap: 24px;
+  list-style: none;
+}
+
+.footer-nav a {
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: var(--transition-fast);
+}
+
+.footer-nav a:hover {
+  color: var(--neon-cyan);
+}
+
+.footer-bottom {
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--text-dim);
+  padding-top: 24px;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Modal Dialog for Historical Anecdotes */
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(12px);
+  z-index: 2000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.modal-backdrop.active {
+  display: flex;
+  opacity: 1;
+}
+
+.modal-content {
+  background: var(--bg-surface);
+  border: 1px solid rgba(0, 240, 255, 0.3);
+  border-radius: var(--radius-lg);
+  max-width: 680px;
+  width: 100%;
+  padding: 36px;
+  position: relative;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.8), 0 0 30px rgba(0, 240, 255, 0.2);
+  transform: translateY(20px);
+  transition: transform 0.3s ease;
+}
+
+.modal-backdrop.active .modal-content {
+  transform: translateY(0);
+}
+
+.modal-close-btn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: rgba(255, 255, 255, 0.08);
+  border: none;
+  color: #fff;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition-fast);
+}
+
+.modal-close-btn:hover {
+  background: var(--speed-red);
+}
+
+.modal-tag {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--neon-cyan);
+  margin-bottom: 8px;
+}
+
+.modal-title {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 16px;
+}
+
+.modal-body {
+  font-size: 0.98rem;
+  color: var(--text-muted);
+  line-height: 1.75;
+}
+
+/* Animations */
+@keyframes pulseGlow {
+  0%, 100% { box-shadow: 0 0 10px rgba(0, 240, 255, 0.2); }
+  50% { box-shadow: 0 0 25px rgba(0, 240, 255, 0.45); }
+}
+
+@keyframes wheelRotate {
+  0% { transform: translateY(-40px); }
+  100% { transform: translateY(40px); }
+}
+
+/* Responsive Media Queries */
+@media (max-width: 1024px) {
+  .hero-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .engine-sim-container {
+    grid-template-columns: 1fr;
+  }
+  .mechanics-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .chassis-features-grid, .future-tech-row {
+    grid-template-columns: 1fr;
+  }
+  .ev-core-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .glossary-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .autonomous-levels-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .nav-links, .nav-cta {
+    display: none;
+  }
+  .mobile-toggle {
+    display: block;
+  }
+  .timeline::after {
+    left: 20px;
+  }
+  .timeline-item {
+    width: 100%;
+    padding-left: 50px;
+    padding-right: 10px;
+  }
+  .timeline-item.left, .timeline-item.right {
+    left: 0;
+    text-align: left;
+  }
+  .timeline-item.left .timeline-node, .timeline-item.right .timeline-node {
+    left: 10px;
+    right: auto;
+  }
+  .timeline-item.left .timeline-tags {
+    justify-content: flex-start;
+  }
+  .stroke-steps-nav {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .drive-options {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .drive-display-card {
+    grid-template-columns: 1fr;
+  }
+  .mechanics-grid, .glossary-grid, .ev-core-grid {
+    grid-template-columns: 1fr;
+  }
+  .autonomous-levels-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  #engineCanvas {
+    height: 380px;
+  }
+}
+
+/* ==========================================================================
+   CHAPTER 08: DIRECT DRIVE SIMULATOR (실시간 인터랙티브 주행 시뮬레이터)
+   ========================================================================== */
+.drivesim-section {
+  background: radial-gradient(circle at 50% 0%, rgba(0, 240, 255, 0.08) 0%, transparent 60%), #07090e;
+  border-top: 2px solid rgba(0, 240, 255, 0.2);
+  position: relative;
+  overflow: hidden;
+}
+
+.drivesim-container {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* Toolbar & Vehicle Switcher */
+.drivesim-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  background: var(--bg-card);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 16px 24px;
+}
+
+.vehicle-selector-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.sim-toolbar-label {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  color: var(--text-dim);
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.vehicle-pill-btn {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-muted);
+  padding: 10px 18px;
+  border-radius: var(--radius-full);
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: var(--transition-fast);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.vehicle-pill-btn:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.vehicle-pill-btn.active {
+  background: rgba(0, 240, 255, 0.15);
+  border-color: var(--neon-cyan);
+  color: var(--neon-cyan);
+  box-shadow: 0 0 16px rgba(0, 240, 255, 0.3);
+}
+
+.sim-utility-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.btn-sim-action {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-main);
+  padding: 10px 18px;
+  border-radius: var(--radius-full);
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: var(--transition-fast);
+}
+
+.btn-sim-action:hover {
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+}
+
+.btn-sim-action.active-sound {
+  border-color: var(--eco-green);
+  color: var(--eco-green);
+  background: rgba(16, 185, 129, 0.12);
+}
+
+/* Simulation Viewport Wrapper */
+.sim-viewport-wrap {
+  position: relative;
+  background: #05070a;
+  border: 1px solid rgba(0, 240, 255, 0.3);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: 0 20px 50px -10px rgba(0, 0, 0, 0.8), 0 0 30px rgba(0, 240, 255, 0.15);
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  min-height: 520px;
+}
+
+#driveCanvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: #0a0e17;
+  cursor: grab;
+}
+
+#driveCanvas:active {
+  cursor: grabbing;
+}
+
+/* Cockpit HUD Overlay */
+.cockpit-hud-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 20px 24px;
+  box-sizing: border-box;
+}
+
+/* HUD Top Bar: Lap Timer, Drift Score, Status */
+.hud-top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.hud-lap-badge {
+  background: rgba(7, 9, 14, 0.8);
+  backdrop-filter: blur(8px);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 10px 16px;
+  font-family: var(--font-mono);
+}
+
+.hud-lap-title {
+  font-size: 0.72rem;
+  color: var(--text-dim);
+  margin-bottom: 2px;
+}
+
+.hud-lap-time {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--neon-cyan);
+}
+
+.hud-drift-badge {
+  background: rgba(255, 51, 102, 0.15);
+  backdrop-filter: blur(8px);
+  border: 1px solid var(--speed-red);
+  border-radius: var(--radius-md);
+  padding: 10px 18px;
+  text-align: right;
+  box-shadow: 0 0 20px rgba(255, 51, 102, 0.3);
+  transition: transform 0.1s ease;
+  opacity: 0;
+}
+
+.hud-drift-badge.active {
+  opacity: 1;
+  transform: scale(1.05);
+}
+
+.hud-drift-label {
+  font-size: 0.75rem;
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: 1px;
+}
+
+.hud-drift-pts {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  font-weight: 900;
+  color: var(--speed-red);
+}
+
+/* Minimap Widget */
+.hud-minimap-box {
+  width: 140px;
+  height: 100px;
+  background: rgba(7, 9, 14, 0.85);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  position: relative;
+  overflow: hidden;
+}
+
+#minimapCanvas {
+  width: 100%;
+  height: 100%;
+}
+
+/* HUD Bottom Dashboard: Analog/Digital Dials */
+.hud-bottom-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  width: 100%;
+}
+
+/* Center Speedometer & Tachometer Cluster */
+.hud-cluster-center {
+  display: flex;
+  align-items: flex-end;
+  gap: 20px;
+  background: rgba(10, 14, 22, 0.85);
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(0, 240, 255, 0.25);
+  border-radius: var(--radius-lg);
+  padding: 18px 28px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7), 0 0 25px rgba(0, 240, 255, 0.15);
+}
+
+.speed-digital-wrap {
+  text-align: center;
+  min-width: 120px;
+}
+
+.speed-number {
+  font-family: var(--font-display);
+  font-size: 3.4rem;
+  font-weight: 900;
+  color: #fff;
+  line-height: 1;
+  letter-spacing: -1px;
+  text-shadow: 0 0 20px rgba(0, 240, 255, 0.6);
+}
+
+.speed-unit {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--neon-cyan);
+  font-weight: 700;
+  letter-spacing: 1px;
+  margin-top: 4px;
+}
+
+/* Shift Indicator & Gear Box */
+.gear-display-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-left: 1px solid var(--border-subtle);
+  border-right: 1px solid var(--border-subtle);
+  padding: 0 20px;
+}
+
+.gear-label {
+  font-size: 0.7rem;
+  font-family: var(--font-mono);
+  color: var(--text-dim);
+}
+
+.gear-digit {
+  font-family: var(--font-display);
+  font-size: 2.8rem;
+  font-weight: 900;
+  color: var(--amber-gold);
+  line-height: 1;
+}
+
+.shift-light-bar {
+  display: flex;
+  gap: 4px;
+  margin-top: 6px;
+}
+
+.shift-led {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #1e293b;
+  transition: var(--transition-fast);
+}
+
+.shift-led.green.lit { background: var(--eco-green); box-shadow: 0 0 8px var(--eco-green); }
+.shift-led.amber.lit { background: var(--amber-gold); box-shadow: 0 0 8px var(--amber-gold); }
+.shift-led.red.lit { background: var(--speed-red); box-shadow: 0 0 10px var(--speed-red); animation: pulseGlow 0.3s infinite; }
+
+/* Tachometer / RPM Bar */
+.tach-wrap {
+  display: flex;
+  flex-direction: column;
+  width: 180px;
+}
+
+.tach-labels {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  margin-bottom: 6px;
+}
+
+.tach-bar-bg {
+  width: 100%;
+  height: 14px;
+  background: #151b28;
+  border-radius: 4px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  position: relative;
+}
+
+.tach-bar-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #00f0ff 0%, #3b82f6 50%, #ffb703 80%, #ff3366 100%);
+  transition: width 0.05s linear;
+}
+
+.tach-num-text {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--neon-cyan);
+  margin-top: 4px;
+  text-align: right;
+}
+
+/* G-Force & Grip Telemetry Card (HUD Left) */
+.hud-gforce-box {
+  background: rgba(10, 14, 22, 0.85);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 14px 18px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.gforce-circle {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: 1px dashed rgba(255, 255, 255, 0.2);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.gforce-circle::after {
+  content: '';
+  position: absolute;
+  width: 1px;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.gforce-circle::before {
+  content: '';
+  position: absolute;
+  height: 1px;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.gforce-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--neon-cyan);
+  box-shadow: 0 0 10px var(--neon-cyan);
+  position: absolute;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+  transition: all 0.08s ease-out;
+}
+
+.gforce-info {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+}
+
+.gforce-val {
+  color: var(--neon-cyan);
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
+/* Tire Grip Indicators (HUD Right) */
+.hud-tires-box {
+  background: rgba(10, 14, 22, 0.85);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 12px 16px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.tire-badge {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  padding: 4px 8px;
+  border-radius: 4px;
+  background: rgba(16, 185, 129, 0.2);
+  color: var(--eco-green);
+  border: 1px solid rgba(16, 185, 129, 0.4);
+  text-align: center;
+  transition: var(--transition-fast);
+}
+
+.tire-badge.slip {
+  background: rgba(255, 51, 102, 0.25);
+  color: var(--speed-red);
+  border-color: var(--speed-red);
+  box-shadow: 0 0 8px rgba(255, 51, 102, 0.4);
+}
+
+/* On-Screen Touch & Mouse Virtual Controls */
+.onscreen-controls-panel {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr 1fr;
+  gap: 20px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 20px 28px;
+  align-items: center;
+}
+
+.steering-control-group {
+  display: flex;
+  gap: 12px;
+}
+
+.btn-virtual-ctrl {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-main);
+  padding: 16px 22px;
+  border-radius: var(--radius-md);
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  transition: var(--transition-fast);
+}
+
+.btn-virtual-ctrl:active, .btn-virtual-ctrl.pressed {
+  background: rgba(0, 240, 255, 0.2);
+  border-color: var(--neon-cyan);
+  color: var(--neon-cyan);
+  transform: scale(0.96);
+  box-shadow: 0 0 15px rgba(0, 240, 255, 0.3);
+}
+
+.btn-virtual-ctrl span.keyhint {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--text-dim);
+}
+
+/* Pedals Group */
+.pedals-control-group {
+  display: flex;
+  gap: 16px;
+  justify-content: flex-end;
+}
+
+.btn-pedal-brake {
+  background: rgba(255, 51, 102, 0.1);
+  border: 1px solid rgba(255, 51, 102, 0.3);
+  color: var(--speed-red);
+}
+
+.btn-pedal-brake:active, .btn-pedal-brake.pressed {
+  background: var(--speed-red);
+  color: #fff;
+  box-shadow: 0 0 20px rgba(255, 51, 102, 0.5);
+}
+
+.btn-pedal-gas {
+  background: rgba(0, 240, 255, 0.12);
+  border: 1px solid rgba(0, 240, 255, 0.4);
+  color: var(--neon-cyan);
+}
+
+.btn-pedal-gas:active, .btn-pedal-gas.pressed {
+  background: var(--neon-cyan);
+  color: #07090e;
+  box-shadow: 0 0 25px rgba(0, 240, 255, 0.6);
+}
+
+/* Keyboard Cheat Sheet */
+.keyboard-guide-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.kb-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 4px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.kb-key {
+  font-family: var(--font-mono);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+  padding: 3px 8px;
+  font-size: 0.75rem;
+  color: #fff;
+  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.5);
+}
+
+/* Vehicle Specs Description in Simulator */
+.sim-vehicle-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 24px 32px;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 20px;
+  align-items: center;
+}
+
+.sim-veh-info h4 {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 6px;
+}
+
+.sim-veh-info p {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+.sim-spec-pill {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 14px;
+  text-align: center;
+}
+
+.sim-spec-label {
+  font-size: 0.72rem;
+  color: var(--text-dim);
+  font-family: var(--font-mono);
+  margin-bottom: 4px;
+}
+
+.sim-spec-value {
+  font-family: var(--font-mono);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--neon-cyan);
+}
+
+@media (max-width: 992px) {
+  .hud-cluster-center {
+    padding: 12px 18px;
+  }
+  .speed-number {
+    font-size: 2.6rem;
+  }
+  .gear-digit {
+    font-size: 2.2rem;
+  }
+  .tach-wrap {
+    width: 130px;
+  }
+  .hud-gforce-box, .hud-tires-box {
+    display: none;
+  }
+  .sim-vehicle-card {
+    grid-template-columns: 1fr 1fr;
+  }
+  .onscreen-controls-panel {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .pedals-control-group, .steering-control-group {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 600px) {
+  .sim-viewport-wrap {
+    min-height: 380px;
+  }
+  .hud-cluster-center {
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+  .tach-wrap {
+    width: 100%;
+  }
+}

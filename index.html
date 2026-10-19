@@ -1,0 +1,1190 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>모빌리티의 여정: 자동차의 역사와 작동 원리 | The Mechanics of Mobility</title>
+  <meta name="description" content="인간의 한계를 확장한 140년의 기계적 진화. 증기차부터 가솔린 내연기관의 4행정 작동 원리, 디퍼런셜 기어, 섀시 구조, 최신 전기차(EV) 플랫폼과 미래 자율주행까지 인터랙티브 시뮬레이터로 탐험하세요.">
+  <meta name="keywords" content="자동차 역사, 엔진 작동원리, 4행정 사이클, 디퍼런셜 기어, 전기차 원리, 인버터, 배터리, 파워트레인, 자율주행">
+  
+  <!-- OpenGraph Metadata -->
+  <meta property="og:title" content="모빌리티의 여정: 자동차의 역사와 작동 원리">
+  <meta property="og:description" content="1886년 칼 벤츠의 삼륜차부터 최신 전기차까지, 자동차의 정교한 메커니즘을 실시간 시뮬레이터로 배우는 인터랙티브 플랫폼.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="assets/car_engine_cutaway.jpg">
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Top Scroll Progress Bar -->
+  <div id="scroll-progress"></div>
+
+  <!-- Global Header Navigation -->
+  <header class="navbar">
+    <div class="container nav-container">
+      <a href="#hero" class="logo" id="mainLogo">
+        <div class="logo-icon">⚙️</div>
+        <span>MOBILITY <span class="logo-badge">ENGINEERING</span></span>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="#history" class="nav-link">역사 타임라인</a></li>
+        <li><a href="#engine" class="nav-link">4행정 엔진</a></li>
+        <li><a href="#powertrain" class="nav-link">구동계 & 섀시</a></li>
+        <li><a href="#electric" class="nav-link">전기차(EV)</a></li>
+        <li><a href="#future" class="nav-link">미래 모빌리티</a></li>
+        <li><a href="#lab" class="nav-link">엔지니어 랩</a></li>
+        <li><a href="#drivesim" class="nav-link" style="color:var(--neon-cyan); font-weight:700;">🏎️ 직접 주행</a></li>
+        <li><a href="#glossary" class="nav-link">용어 사전</a></li>
+      </ul>
+
+      <div class="nav-cta">
+        <a href="#drivesim" class="btn-nav-action" id="headerEngineCta">🏎️ 트랙 시운전</a>
+      </div>
+
+      <button class="mobile-toggle" id="mobileMenuBtn" aria-label="메뉴 열기">☰</button>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero-section" id="hero">
+    <canvas id="heroCanvas" class="hero-canvas-bg"></canvas>
+    <div class="container hero-content">
+      <div class="hero-tag">
+        <span>🚀 140 YEARS OF AUTOMOTIVE INNOVATION</span>
+      </div>
+      <h1 class="hero-title">
+        인간의 한계를 확장한 혁신,<br>
+        <span class="gradient-text">자동차의 역사와 작동 원리</span>
+      </h1>
+      <p class="hero-desc">
+        1886년 칼 벤츠의 삼륜차에서 시작된 내연기관의 불꽃부터, 
+        현대 최첨단 전기차(EV)의 전자기 구동계와 인공지능 자율주행까지.<br>
+        인류 문명을 바꿔놓은 자동차의 기계적 메커니즘을 살아 숨 쉬는 인터랙티브 그래픽으로 탐험해보세요.
+      </p>
+
+      <div class="hero-actions">
+        <a href="#drivesim" class="btn-primary" id="heroDriveBtn" style="background:var(--gradient-red-orange); box-shadow:0 0 30px rgba(255, 51, 102, 0.45);">
+          <span>🏎️ 트랙 직접 시운전하기 (Live Drive)</span>
+        </a>
+        <a href="#engine" class="btn-secondary" id="heroSimBtn">
+          <span>⚡ 4행정 엔진 시뮬레이터</span>
+        </a>
+        <a href="#history" class="btn-secondary" id="heroHistoryBtn">
+          <span>📜 140년 연대기</span>
+        </a>
+      </div>
+
+      <!-- Hero Key Stats Grid -->
+      <div class="hero-stats">
+        <div class="stat-item">
+          <div class="stat-number">140+</div>
+          <div class="stat-label">년의 진화사 (1886 ~)</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">30,000+</div>
+          <div class="stat-label">내연기관 정밀 부품 수</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">4-STROKE</div>
+          <div class="stat-label">흡입·압축·폭발·배기 사이클</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">88% +</div>
+          <div class="stat-label">차세대 전기차 에너지 효율</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ----------------------------------------------------------------------
+       CHAPTER 1: 자동차의 위대한 역사 (TIMELINE & MILESTONES)
+       ---------------------------------------------------------------------- -->
+  <section class="history-section" id="history">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-badge">CHAPTER 01 • HISTORICAL CHRONOLOGY</div>
+        <h2 class="section-title">말(馬) 없는 마차에서 미래 모빌리티까지</h2>
+        <p class="section-desc">
+          바퀴의 발명 이후 인류 최대의 이동성 혁명이었던 자동차. 
+          증기기관의 여명기부터 대량생산, 안전 혁신, 그리고 오늘날의 전동화와 인공지능에 이르기까지 
+          시대의 흐름을 바꾼 결정적 순간들을 만나보세요.
+        </p>
+      </div>
+
+      <!-- Panoramic Museum Visual -->
+      <div class="history-banner">
+        <img src="assets/car_history.jpg" alt="자동차 역사의 진화 파노라마 전시">
+        <div class="history-banner-overlay">
+          <div class="history-banner-caption">인류 모빌리티 140년의 진화 박물관</div>
+          <div class="history-banner-sub">1886년 벤츠 삼륜차부터 1908년 포드 모델 T, 클래식 스포츠카와 현대 하이퍼카의 조우</div>
+        </div>
+      </div>
+
+      <!-- Era Filter Buttons -->
+      <div class="era-filters">
+        <button class="era-filter-btn active" data-era="all">전체 연대기 (All)</button>
+        <button class="era-filter-btn" data-era="dawn">1. 여명기 (1769 - 1886)</button>
+        <button class="era-filter-btn" data-era="mass">2. 대량생산 (1908 - 1930s)</button>
+        <button class="era-filter-btn" data-era="golden">3. 황금기 & 안전 (1940s - 1970s)</button>
+        <button class="era-filter-btn" data-era="elec">4. 전자제어 & 친환경 (1980s - 2000s)</button>
+        <button class="era-filter-btn" data-era="future">5. 전동화 & AI (2010s - 현재)</button>
+      </div>
+
+      <!-- Vertical Interactive Timeline -->
+      <div class="timeline" id="historyTimeline">
+
+        <!-- Milestone 1 -->
+        <div class="timeline-item left" data-era="dawn">
+          <div class="timeline-node"></div>
+          <div class="timeline-card">
+            <span class="timeline-year">1769년</span>
+            <h3 class="timeline-title">니콜라 퀴뇨의 증기 자동차</h3>
+            <p class="timeline-text">
+              프랑스의 공병 장교 니콜라 조제프 퀴뇨가 무거운 대포를 견인하기 위해 보일러를 얹어 만든 
+              인류 역사상 최초의 '스스로 움직이는 기계(자주식 차량)'. 비록 속도는 시속 4km에 불과했고 
+              벽에 부딪히며 최초의 자동차 교통사고를 냈지만, 가축 없이 기계 힘으로 이동할 수 있음을 증명했습니다.
+            </p>
+            <div class="timeline-tags">
+              <span class="timeline-tag">증기 보일러</span>
+              <span class="timeline-tag">세계 최초 자주식 차량</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Milestone 2 -->
+        <div class="timeline-item right" data-era="dawn">
+          <div class="timeline-node"></div>
+          <div class="timeline-card">
+            <span class="timeline-year">1886년</span>
+            <h3 class="timeline-title">칼 벤츠의 페이턴트 모터바겐</h3>
+            <p class="timeline-text">
+              독일의 엔지니어 칼 벤츠(Carl Benz)가 가솔린 4행정 단기통 엔진(0.75마력)을 얹은 3륜차를 완성하고 
+              독일 제국 특허청에 특허(DRP 37435호)를 등록했습니다. 공식적으로 인류 최초의 실용적 가솔린 자동차가 탄생한 순간입니다.
+            </p>
+            <div class="timeline-tags">
+              <span class="timeline-tag">가솔린 내연기관</span>
+              <span class="timeline-tag">세계 최초 특허 자동차</span>
+            </div>
+            <button class="timeline-expand-btn" data-story="bertha">
+              <span>📖 베르타 벤츠의 세계 최초 194km 주행 비화 보기</span> ➔
+            </button>
+          </div>
+        </div>
+
+        <!-- Milestone 3 -->
+        <div class="timeline-item left" data-era="mass">
+          <div class="timeline-node"></div>
+          <div class="timeline-card">
+            <span class="timeline-year">1908년</span>
+            <h3 class="timeline-title">헨리 포드의 모델 T와 컨베이어 벨트 혁신</h3>
+            <p class="timeline-text">
+              소수 부유층의 사치품이었던 자동차를 만인의 필수품으로 바꾼 대사건. 
+              1913년 도입된 이동식 컨베이어 벨트 분업 조립 라인(포디즘)을 통해 차량 1대 제작 시간을 93분으로 단축시키며 
+              가격 파괴를 이뤄냈고, 1,500만 대 이상 판매되며 모빌리티 대중화 시대를 열었습니다.
+            </p>
+            <div class="timeline-tags">
+              <span class="timeline-tag">컨베이어 벨트</span>
+              <span class="timeline-tag">대량생산(포디즘)</span>
+              <span class="timeline-tag">대중화</span>
+            </div>
+            <button class="timeline-expand-btn" data-story="ford">
+              <span>📖 포디즘과 5달러 일급 혁명 이야기</span> ➔
+            </button>
+          </div>
+        </div>
+
+        <!-- Milestone 4 -->
+        <div class="timeline-item right" data-era="mass">
+          <div class="timeline-node"></div>
+          <div class="timeline-card">
+            <span class="timeline-year">1938년</span>
+            <h3 class="timeline-title">폭스바겐 비틀과 공기역학 디자인</h3>
+            <p class="timeline-text">
+              페르디난트 포르쉐 박사가 설계한 '국민차(Volkswagen)'. 
+              둥근 딱정벌레 유선형 바디는 공기 저항 계수(Cd)를 획기적으로 낮추었고, 
+              공랭식 리어 엔진-후륜구동(RR) 구조로 뛰어난 내구성과 경제성을 달성하며 단일 모델 최장수 생산 기록을 세웠습니다.
+            </p>
+            <div class="timeline-tags">
+              <span class="timeline-tag">공기역학 (Aerodynamics)</span>
+              <span class="timeline-tag">RR 레이아웃</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Milestone 5 -->
+        <div class="timeline-item left" data-era="golden">
+          <div class="timeline-node"></div>
+          <div class="timeline-card">
+            <span class="timeline-year">1959년</span>
+            <h3 class="timeline-title">볼보 닐스 볼린의 3점식 안전벨트 발명</h3>
+            <p class="timeline-text">
+              자동차 역사상 가장 위대한 안전 혁명. 닐스 볼린이 상체와 골반을 동시에 고정하는 V자형 3점식 안전벨트를 개발했습니다. 
+              볼보는 독점 특허로 막대한 돈을 버는 대신, "모든 생명의 가치가 이윤보다 소중하다"며 전 세계 경쟁사에 특허를 무료 공개했습니다.
+            </p>
+            <div class="timeline-tags">
+              <span class="timeline-tag">3점식 안전벨트</span>
+              <span class="timeline-tag">특허 전면 무료 개방</span>
+              <span class="timeline-tag">100만 명 구원</span>
+            </div>
+            <button class="timeline-expand-btn" data-story="safety">
+              <span>📖 볼보의 위대한 특허 무료 공개 이야기</span> ➔
+            </button>
+          </div>
+        </div>
+
+        <!-- Milestone 6 -->
+        <div class="timeline-item right" data-era="elec">
+          <div class="timeline-node"></div>
+          <div class="timeline-card">
+            <span class="timeline-year">1970~80년대</span>
+            <h3 class="timeline-title">오일쇼크와 전자제어(ECU), 친환경 촉매</h3>
+            <p class="timeline-text">
+              두 차례의 석유 파동으로 연비가 핵심 경쟁력이 되었습니다. 기계식 카뷰레터 대신 컴퓨터(ECU)가 정밀 제어하는 
+              전자제어 연료분사(EFI)가 도입되었고, 배기가스를 정화하는 삼원 촉매 변환기와 급제동 시 바퀴 잠김을 방지하는 ABS가 보편화되었습니다.
+            </p>
+            <div class="timeline-tags">
+              <span class="timeline-tag">전자제어장치 (ECU)</span>
+              <span class="timeline-tag">EFI 연료분사</span>
+              <span class="timeline-tag">ABS 제동제어</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Milestone 7 -->
+        <div class="timeline-item left" data-era="elec">
+          <div class="timeline-node"></div>
+          <div class="timeline-card">
+            <span class="timeline-year">1997년</span>
+            <h3 class="timeline-title">토요타 프리우스와 하이브리드(HEV) 탄생</h3>
+            <p class="timeline-text">
+              세계 최초의 양산형 가솔린-전기 하이브리드 승용차. 
+              가솔린 엔진과 영구자석 모터, 유성기어(동력분할장치)를 유기적으로 조합하여 
+              정체 구간에서는 모터로, 가속 시에는 엔진과 모터를 동시에 구동하며 감속 시에는 회생 제동으로 배터리를 충전했습니다.
+            </p>
+            <div class="timeline-tags">
+              <span class="timeline-tag">하이브리드 (HEV)</span>
+              <span class="timeline-tag">회생 제동 시스템</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Milestone 8 -->
+        <div class="timeline-item right" data-era="future">
+          <div class="timeline-node"></div>
+          <div class="timeline-card">
+            <span class="timeline-year">2012년 ~ 현재</span>
+            <h3 class="timeline-title">전용 전기차(EV) 플랫폼과 SDV 혁명</h3>
+            <p class="timeline-text">
+              차체 바닥에 배터리를 낮게 깐 '스케이트보드 플랫폼'의 대중화로 실내 공간과 무게 중심이 극적으로 개선되었습니다. 
+              스마트폰처럼 무선 소프트웨어 업데이트(OTA)로 차량 성능이 계속 진화하는 SDV(소프트웨어 중심 자동차)와 
+              라이다·카메라·AI를 결합한 자율주행 기술이 모빌리티의 미래를 다시 쓰고 있습니다.
+            </p>
+            <div class="timeline-tags">
+              <span class="timeline-tag">스케이트보드 플랫폼</span>
+              <span class="timeline-tag">OTA 무선 업데이트</span>
+              <span class="timeline-tag">AI 자율주행</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ----------------------------------------------------------------------
+       CHAPTER 2: 내연기관(ICE)의 작동 원리 (4-STROKE ENGINE SIMULATOR)
+       ---------------------------------------------------------------------- -->
+  <section class="engine-section" id="engine">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-badge">CHAPTER 02 • MECHANICAL HEART</div>
+        <h2 class="section-title">자동차의 심장, 내연기관 4행정 사이클</h2>
+        <p class="section-desc">
+          화학 에너지(가솔린)를 기계적 회전 에너지로 바꾸는 열역학 오토 사이클(Otto Cycle).<br>
+          크랭크샤프트가 두 바퀴(720°) 회전하는 동안 일어나는 흡입, 압축, 폭발, 배기의 전 과정을 
+          실시간 인터랙티브 시뮬레이터로 직접 조작해보세요.
+        </p>
+      </div>
+
+      <!-- Simulator Main Wrap -->
+      <div class="engine-sim-container">
+        <!-- Canvas Visualizer -->
+        <div class="engine-canvas-wrap">
+          <div class="engine-canvas-hud">
+            <div class="hud-pill" id="hudStroke">행정: 흡입 (INTAKE)</div>
+            <div class="hud-pill" id="hudAngle">크랭크각: 0°</div>
+          </div>
+          <canvas id="engineCanvas"></canvas>
+        </div>
+
+        <!-- Controls & Telemetry Panel -->
+        <div class="engine-controls-panel">
+          <!-- Step Jump Buttons -->
+          <div class="stroke-steps-nav">
+            <button class="stroke-btn active" data-stroke="0">
+              <span class="num">STEP 1</span>
+              <span>1. 흡입</span>
+            </button>
+            <button class="stroke-btn" data-stroke="1">
+              <span class="num">STEP 2</span>
+              <span>2. 압축</span>
+            </button>
+            <button class="stroke-btn" data-stroke="2">
+              <span class="num">STEP 3</span>
+              <span>3. 폭발(팽창)</span>
+            </button>
+            <button class="stroke-btn" data-stroke="3">
+              <span class="num">STEP 4</span>
+              <span>4. 배기</span>
+            </button>
+          </div>
+
+          <!-- Current Stroke Details -->
+          <div class="stroke-detail-card">
+            <div class="stroke-header-badge">
+              <h3 class="stroke-title" id="strokeTitle">1. 흡입 행정 (Intake)</h3>
+              <span class="stroke-valve-status" id="valveStatus">흡기: 열림 / 배기: 닫힘</span>
+            </div>
+            <p class="stroke-description" id="strokeDesc">
+              흡기 밸브가 열리고 피스톤이 하강하면서 실린더 내부에 음압(진공)이 형성됩니다. 
+              공기와 미립화된 가솔린 연료의 혼합기가 실린더 내부로 상쾌하게 빨려 들어옵니다.
+            </p>
+            <div class="stroke-telemetry">
+              <div class="telemetry-item">
+                <div class="telemetry-val" id="telPressure">0.8 ~ 1.0 bar</div>
+                <div class="telemetry-label">실린더 내부 압력</div>
+              </div>
+              <div class="telemetry-item">
+                <div class="telemetry-val" id="telTemp">40 ~ 70 ℃</div>
+                <div class="telemetry-label">연소실 평균 온도</div>
+              </div>
+              <div class="telemetry-item">
+                <div class="telemetry-val" id="telRpm">900 RPM</div>
+                <div class="telemetry-label">엔진 회전 속도</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Playback Controls -->
+          <div class="sim-playback-bar">
+            <button class="btn-icon-control" id="enginePlayBtn" title="재생/일시정지">❚❚</button>
+            <div class="slider-group">
+              <div class="slider-label">
+                <span>엔진 회전수 (RPM 조절)</span>
+                <span id="rpmValueDisplay" style="color:var(--neon-cyan)">900 RPM (아이들링)</span>
+              </div>
+              <input type="range" class="custom-range" id="engineRpmSlider" min="200" max="3000" step="100" value="900">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Engine Engineering Deep Dive Grid -->
+      <div class="mechanics-grid">
+        <div class="mechanic-card">
+          <div class="mechanic-icon">⚙️</div>
+          <h3>DOHC와 가변 밸브 타이밍 (VVT)</h3>
+          <p>
+            실린더 헤드 상단에 2개의 캠샤프트(Double Overhead Camshaft)를 배치하여 
+            흡기와 배기 밸브를 독립적으로 정밀 구동합니다. 고속 주행 시 밸브가 열려 있는 시간과 깊이를 
+            전자식으로 가변 조절하여 모든 회전 영역에서 최적의 연소 효율을 끌어냅니다.
+          </p>
+        </div>
+
+        <div class="mechanic-card">
+          <div class="mechanic-icon">💉</div>
+          <h3>가솔린 직분사 (GDI)와 공연비</h3>
+          <p>
+            흡기 포트에서 섞지 않고 연소실 내부로 최대 200~350바의 초고압으로 가솔린을 직접 분사합니다. 
+            이상적인 공연비(공기 14.7 : 연료 1)를 컴퓨터(ECU)가 1/1,000초 단위로 계산하여 
+            미세한 연료 방울이 완벽하게 기화되도록 만들어 출력과 연비를 대폭 높입니다.
+          </p>
+        </div>
+
+        <div class="mechanic-card">
+          <div class="mechanic-icon">🌪️</div>
+          <h3>터보차저 & 인터쿨러 (Turbocharging)</h3>
+          <p>
+            배기 매니폴드로 그냥 버려지던 고에너지 배기가스의 압력으로 터빈을 분당 10만~25만 회 회전시킵니다. 
+            동축으로 연결된 컴프레서가 신선한 흡기를 강하게 압축하고, 압축열로 뜨거워진 공기를 
+            인터쿨러로 냉각시켜 산소 밀도를 극대화함으로써 작은 배기량으로도 대배기량급의 폭발력을 발휘합니다.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ----------------------------------------------------------------------
+       CHAPTER 3: 구동계 & 섀시 메커니즘 (DRIVETRAIN, STEERING, BRAKING)
+       ---------------------------------------------------------------------- -->
+  <section class="powertrain-section" id="powertrain">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-badge">CHAPTER 03 • POWER DELIVERY & CHASSIS</div>
+        <h2 class="section-title">엔진의 힘이 바퀴에 닿기까지</h2>
+        <p class="section-desc">
+          엔진에서 만들어진 회전력은 어떻게 손실 없이 바퀴를 굴릴까요?<br>
+          변속기, 드라이브샤프트, 그리고 코너링의 마술사인 디퍼런셜 기어까지 
+          정교한 파워트레인과 섀시의 역학을 탐구해보세요.
+        </p>
+      </div>
+
+      <!-- Technical Cutaway Banner -->
+      <div class="powertrain-banner">
+        <img src="assets/car_engine_cutaway.jpg" alt="하이퍼카 파워트레인 기계 설계 투시도 청사진">
+      </div>
+
+      <!-- Powertrain Flowchart -->
+      <div class="flowchart-container">
+        <h3 class="flowchart-title">동력 전달 흐름도 (Powertrain Flow) • 아래 단계를 클릭해보세요</h3>
+        <div class="flowchart-steps">
+          <div class="flow-node active" data-step="engine">
+            <div class="flow-node-num">01 STAGE</div>
+            <div class="flow-node-title">엔진 / 모터</div>
+            <div class="flow-node-desc">최초 회전 토크 생성</div>
+          </div>
+          <div class="flow-arrow">➔</div>
+
+          <div class="flow-node" data-step="clutch">
+            <div class="flow-node-num">02 STAGE</div>
+            <div class="flow-node-title">클러치/토크컨버터</div>
+            <div class="flow-node-desc">동력 단속 및 완충</div>
+          </div>
+          <div class="flow-arrow">➔</div>
+
+          <div class="flow-node" data-step="trans">
+            <div class="flow-node-num">03 STAGE</div>
+            <div class="flow-node-title">변속기</div>
+            <div class="flow-node-desc">기어비 변환 및 토크 증폭</div>
+          </div>
+          <div class="flow-arrow">➔</div>
+
+          <div class="flow-node" data-step="shaft">
+            <div class="flow-node-num">04 STAGE</div>
+            <div class="flow-node-title">드라이브샤프트</div>
+            <div class="flow-node-desc">차체 관통 회전 전달</div>
+          </div>
+          <div class="flow-arrow">➔</div>
+
+          <div class="flow-node" data-step="diff">
+            <div class="flow-node-num">05 STAGE</div>
+            <div class="flow-node-title">디퍼런셜 기어</div>
+            <div class="flow-node-desc">회전축 90° 전환 & 차동 조절</div>
+          </div>
+          <div class="flow-arrow">➔</div>
+
+          <div class="flow-node" data-step="wheels">
+            <div class="flow-node-num">06 STAGE</div>
+            <div class="flow-node-title">바퀴 & 타이어</div>
+            <div class="flow-node-desc">노면 마찰 트랙션 추진</div>
+          </div>
+        </div>
+
+        <!-- Dynamic Detail Display -->
+        <div id="flowDetailBox">
+          <div class="flow-detail-icon">⚡</div>
+          <div class="flow-detail-content">
+            <h4>1. 엔진 / 구동 모터 (Engine / Electric Motor)</h4>
+            <p>
+              화학 에너지(가솔린/디젤)의 연소 압력 또는 배터리의 전기 에너지를 전자기력으로 변환하여 
+              바퀴를 굴릴 회전력(토크, Torque)을 최초로 생성하는 자동차의 핵심 심장입니다.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Differential & Chassis Features Grid -->
+      <div class="chassis-features-grid">
+
+        <!-- Feature 1: Differential Gear Simulator -->
+        <div class="chassis-feature-card">
+          <h3><span>🔀</span> 디퍼런셜 기어(차동기어)의 작동 원리</h3>
+          <p>
+            자동차가 코너를 돌 때, 바깥쪽 바퀴는 안쪽 바퀴보다 더 긴 궤적을 돌아야 합니다. 
+            만약 좌우 바퀴가 쇠막대로 단단히 고정되어 있다면 타이어가 노면을 질질 끌며 미끄러지고 차체가 회전하지 못합니다. 
+            디퍼런셜 기어는 이 좌우 회전수 차이를 내부 피니언 기어가 회전하며 저절로 보정해주는 천재적인 기구입니다.
+          </p>
+
+          <div class="interactive-demo-box">
+            <div class="differential-vis">
+              <div class="wheel-indicator">
+                <div class="wheel-label">좌측 바퀴 (Left)</div>
+                <div class="wheel-graphic"></div>
+                <div class="wheel-rpm-badge" id="leftWheelRpm">1000 RPM</div>
+              </div>
+
+              <div class="diff-center-box">
+                <div class="diff-center-title">DIFFERENTIAL</div>
+                <div style="font-size:0.75rem; color:var(--text-muted); margin-top:4px;">피니언 차동 보상</div>
+              </div>
+
+              <div class="wheel-indicator">
+                <div class="wheel-label">우측 바퀴 (Right)</div>
+                <div class="wheel-graphic"></div>
+                <div class="wheel-rpm-badge" id="rightWheelRpm">1000 RPM</div>
+              </div>
+            </div>
+
+            <!-- Turn Angle Selector -->
+            <div class="turn-control-btns">
+              <button class="turn-btn" data-turn="left">◀ 좌회전 중 (Left Turn)</button>
+              <button class="turn-btn active" data-turn="straight">▲ 직진 (Straight)</button>
+              <button class="turn-btn" data-turn="right">▶ 우회전 중 (Right Turn)</button>
+            </div>
+            <p id="diffStatusText" style="font-size:0.8rem; color:var(--text-muted); margin-top:14px;">
+              직진 주행: 양쪽 바퀴가 동일한 거리를 이동하므로 피니언 기어가 자전하지 않고 1:1로 고르게 구동력을 배분합니다.
+            </p>
+          </div>
+        </div>
+
+        <!-- Feature 2: Braking & Steering -->
+        <div class="chassis-feature-card">
+          <h3><span>🛑</span> 파스칼의 원리와 제동 시스템</h3>
+          <p>
+            운전자가 브레이크 페달을 밟으면, 진공 배력 장치(하이드로백)가 힘을 4~5배 증폭하고 
+            마스터 실린더의 브레이크액(유압)이 파스칼의 원리를 통해 4개 바퀴의 캘리퍼 피스톤으로 균등하게 전달됩니다. 
+            피스톤이 브레이크 패드를 디스크 로터에 강력하게 밀착시켜 회전 운동 에너지를 순간적으로 열에너지로 소산시킵니다.
+          </p>
+
+          <div class="interactive-demo-box" style="text-align:left;">
+            <div style="font-weight:700; color:var(--neon-cyan); margin-bottom:8px; font-size:0.95rem;">
+              💡 최신 전자식 제동 시스템
+            </div>
+            <ul style="font-size:0.88rem; color:var(--text-muted); padding-left:18px; line-height:1.7;">
+              <li><strong>ABS (Anti-lock Brake System):</strong> 급제동 시 바퀴가 잠겨 조향 불능이 되는 것을 막기 위해 초당 수십 회 유압을 풀었다 조였다 반복.</li>
+              <li><strong>ESC (차체 자세 제어장치):</strong> 급선회 시 차량이 미끄러질 조짐이 보이면 각 바퀴에 독립적으로 브레이크를 걸어 스핀 방지.</li>
+              <li><strong>회생 제동 (전기차):</strong> 감속 시 모터를 발전기로 전환하여 제동력을 얻는 동시에 전기를 배터리에 회수.</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ----------------------------------------------------------------------
+       CHAPTER 4: 전기차(EV) 혁명 (ELECTRIC VEHICLE PLATFORM)
+       ---------------------------------------------------------------------- -->
+  <section class="ev-section" id="electric">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-badge">CHAPTER 04 • ELECTRIC REVOLUTION</div>
+        <h2 class="section-title">패러다임의 대전환, 순수 전기차(EV)의 해부</h2>
+        <p class="section-desc">
+          2만 개 이상의 움직이는 기계 부품이 필요했던 복잡한 엔진 대신, 
+          영구자석 모터, 인버터, 배터리 팩으로 단순화된 전동화 플랫폼.<br>
+          스케이트보드 섀시 위에서 펼쳐지는 놀라운 전기적 원리와 효율의 비밀을 확인하세요.
+        </p>
+      </div>
+
+      <!-- EV Platform Blueprint Banner -->
+      <div class="ev-banner">
+        <img src="assets/ev_platform.jpg" alt="미래형 전기차 스케이트보드 섀시 플랫폼 청사진">
+      </div>
+
+      <!-- 4 Core Elements of EV -->
+      <div class="ev-core-grid">
+        <div class="ev-core-card">
+          <div class="ev-core-badge">01 DRIVE UNIT</div>
+          <h4>구동 모터 (Electric Motor)</h4>
+          <p>
+            플레밍의 왼손 법칙과 전자기 유도 원리를 이용합니다. 
+            고정자(Stator) 코일에 흐르는 교류 전류가 회전 자기장을 형성하고, 
+            로터(Rotor)의 영구자석이 이에 이끌려 0 RPM부터 즉각적인 최대 토크를 뿜어내며 최고 15,000~20,000 RPM까지 회전합니다.
+          </p>
+        </div>
+
+        <div class="ev-core-card">
+          <div class="ev-core-badge">02 POWER BRAIN</div>
+          <h4>인버터 (Inverter)</h4>
+          <p>
+            전기차의 두뇌. 배터리에 저장된 직류(DC) 전기를 모터 구동용 고전압 3상 교류(AC)로 초당 수천 번 이상 정밀 스위칭 변환합니다. 
+            가속 페달 신호에 따라 주파수와 전압을 미세 조절하여 차량 속도와 토크를 제어하고, 감속 시에는 회생 제동을 역제어합니다.
+          </p>
+        </div>
+
+        <div class="ev-core-card">
+          <div class="ev-core-badge">03 ENERGY STORAGE</div>
+          <h4>배터리팩 & BMS</h4>
+          <p>
+            수천 개의 리튬이온(NCM/LFP) 셀을 묶은 대용량 고전압 배터리(400V~800V). 
+            차량 가장 낮은 바닥에 평평하게 깔려 이상적인 저중심 설계를 완성합니다. 
+            배터리 관리 시스템(BMS)이 셀 전압, 전류, 온도를 실시간 감시하며 정밀 수냉식 열관리를 수행합니다.
+          </p>
+        </div>
+
+        <div class="ev-core-card">
+          <div class="ev-core-badge">04 GEAR SYSTEM</div>
+          <h4>감속기 (Reducer)</h4>
+          <p>
+            전기 모터는 매우 넓은 회전수 영역에서 일정한 고효율을 내므로 복잡한 다단 변속기가 필요 없습니다. 
+            모터의 초고속 회전수(예: 12,000 RPM)를 바퀴 회전 속도에 맞게 약 8:1~10:1 고정 기어비로 일정하게 낮춰주면서 
+            바퀴에 걸리는 토크를 증폭시킵니다.
+          </p>
+        </div>
+      </div>
+
+      <!-- ICE vs EV Arena Table -->
+      <div class="vs-arena-container">
+        <div class="vs-header">
+          <h3>내연기관(ICE) vs 순수 전기차(EV) 메커니즘 대결</h3>
+          <p style="color:var(--text-muted); font-size:0.95rem;">구조적 단순함, 즉각적인 반응성, 그리고 압도적인 에너지 효율의 차이</p>
+        </div>
+
+        <div class="vs-table-wrap">
+          <table class="vs-table">
+            <thead>
+              <tr>
+                <th style="width:20%">비교 항목</th>
+                <th class="col-ice" style="width:40%">전통 내연기관 (가솔린/디젤)</th>
+                <th class="col-ev" style="width:40%">순수 전기차 (BEV)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>종합 에너지 효율</strong></td>
+                <td>
+                  <strong>약 20 ~ 25%</strong>
+                  <div class="efficiency-bar-container"><div class="efficiency-bar bar-ice"></div></div>
+                  <span style="font-size:0.75rem; color:var(--text-dim);">에너지 70% 이상이 열과 배기가스로 손실</span>
+                </td>
+                <td>
+                  <strong>약 85 ~ 90% 이상</strong>
+                  <div class="efficiency-bar-container"><div class="efficiency-bar bar-ev"></div></div>
+                  <span style="font-size:0.75rem; color:var(--neon-cyan);">전자기 변환 효율 극대화 + 회생 제동 에너지 회수</span>
+                </td>
+              </tr>
+              <tr>
+                <td><strong>구동 부품 수</strong></td>
+                <td>약 2,000 ~ 3,000개 이상의 정밀 무빙 파츠</td>
+                <td>약 20개 내외의 단순한 회전 부품 (고장 요인 최소화)</td>
+              </tr>
+              <tr>
+                <td><strong>최대 토크 발휘 시점</strong></td>
+                <td>엔진이 3,000 ~ 5,000 RPM까지 회전수를 올려야 발휘</td>
+                <td><strong>0 RPM(출발 직후 0.01초)</strong>부터 즉각 최대 토크 폭발</td>
+              </tr>
+              <tr>
+                <td><strong>차량 무게 중심</strong></td>
+                <td>무거운 엔진이 보닛 위쪽에 위치하여 롤링 발생</td>
+                <td>수백 kg의 배터리가 바닥 가장 아래에 깔려 롤링 억제</td>
+              </tr>
+              <tr>
+                <td><strong>소음 및 진동 (NVH)</strong></td>
+                <td>실린더 폭발 진동과 배기 머플러 소음 불가피</td>
+                <td>회전 운동만 존재하므로 극저소음, 무진동 실내 구현</td>
+              </tr>
+              <tr>
+                <td><strong>유지보수 항목</strong></td>
+                <td>엔진오일, 미션오일, 점화플러그, 타이밍벨트 등 주기적 교환</td>
+                <td>오일 교환 불필요, 회생제동 덕분에 브레이크 패드 수명 2~3배 연장</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ----------------------------------------------------------------------
+       CHAPTER 5: 미래 모빌리티와 자율주행 (FUTURE MOBILITY)
+       ---------------------------------------------------------------------- -->
+  <section class="future-section" id="future">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-badge">CHAPTER 05 • FUTURE TECH</div>
+        <h2 class="section-title">운전자가 사라진 내일, 자율주행과 SDV</h2>
+        <p class="section-desc">
+          자동차는 이제 단순한 기계 장치가 아니라 '바퀴 달린 컴퓨터'로 거듭나고 있습니다.<br>
+          미국 자동차공학회(SAE)가 정의한 6단계 자율주행 기준과 최첨단 센서 융합 기술을 살펴보세요.
+        </p>
+      </div>
+
+      <!-- SAE Levels Grid -->
+      <div class="autonomous-levels-grid">
+        <div class="level-card">
+          <div class="level-number">L0</div>
+          <div class="level-title">비자동화 (No Auto)</div>
+          <div class="level-desc">운전자가 100% 조향과 가감속을 직접 제어. 단순 경고음만 제공.</div>
+        </div>
+        <div class="level-card">
+          <div class="level-number">L1</div>
+          <div class="level-title">운전자 지원</div>
+          <div class="level-desc">차선 유지 보조 또는 어댑티브 크루즈 컨트롤 중 하나만 보조.</div>
+        </div>
+        <div class="level-card">
+          <div class="level-number">L2</div>
+          <div class="level-title">부분 자동화</div>
+          <div class="level-desc">조향과 속도를 동시에 제어. 운전자는 항시 전방 주시 및 핸들 파지 필수.</div>
+        </div>
+        <div class="level-card" style="border-color: rgba(0,240,255,0.4);">
+          <div class="level-number">L3</div>
+          <div class="level-title">조건부 자동화</div>
+          <div class="level-desc">고속도로 등 특정 조건에서 시스템이 운전. 비상시에만 운전자가 개입.</div>
+        </div>
+        <div class="level-card">
+          <div class="level-number">L4</div>
+          <div class="level-title">고도 자동화</div>
+          <div class="level-desc">정해진 구역(지오펜싱) 내에서는 위험 상황에서도 시스템이 스스로 대처.</div>
+        </div>
+        <div class="level-card" style="border-color: rgba(0,240,255,0.8); background:rgba(0,240,255,0.06);">
+          <div class="level-number">L5</div>
+          <div class="level-title">완전 자동화</div>
+          <div class="level-desc">스티어링 휠과 페달이 없는 완전 무인 로보택시. 모든 도로 조건 자율 주행.</div>
+        </div>
+      </div>
+
+      <!-- Future Tech Twin Cards -->
+      <div class="future-tech-row">
+        <div class="future-card">
+          <h3><span>📡</span> 센서 융합 (Sensor Fusion) 시스템</h3>
+          <p>
+            자율주행차는 사람의 눈과 귀를 대신하여 3대 핵심 센서를 결합합니다.<br>
+            • <strong>카메라:</strong> 표지판, 신호등 색상, 차선 식별에 탁월하지만 야간/역광/폭우 시 취약.<br>
+            • <strong>밀리미터파 레이더:</strong> 전자기파를 쏘아 안개나 폭설 속에서도 앞차와의 거리와 속도를 정확 측정.<br>
+            • <strong>라이다 (LiDAR):</strong> 초당 수백만 개의 레이저 펄스를 방출하여 주변 360도의 정밀한 3D 점군(Point Cloud) 지도를 실시간 구축.
+          </p>
+        </div>
+
+        <div class="future-card">
+          <h3><span>⚡</span> 수소연료전지(FCEV)와 차세대 SDV</h3>
+          <p>
+            • <strong>수소차(FCEV):</strong> 탱크에 저장된 수소(H₂)와 공기 중의 산소(O₂)를 연료전지 스택에서 전기화학 반응시켜 전기를 직접 생산하고 순수한 물(H₂O)만 배출하는 궁극의 친환경차.<br>
+            • <strong>SDV (Software Defined Vehicle):</strong> 차량의 하드웨어와 소프트웨어가 완전히 분리되어, 공장에 들어가지 않고도 무선 OTA 통신으로 출력 업그레이드, 자율주행 알고리즘 개선, 새로운 UI를 지속적으로 다운받는 스마트 모빌리티.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ----------------------------------------------------------------------
+       CHAPTER 6: 엔지니어 랩 & 퀴즈 (INTERACTIVE LAB & QUIZ)
+       ---------------------------------------------------------------------- -->
+  <section class="lab-section" id="lab">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-badge">CHAPTER 06 • INTERACTIVE LAB</div>
+        <h2 class="section-title">인터랙티브 엔지니어 랩 & 지식 퀴즈</h2>
+        <p class="section-desc">
+          구동방식(FF, FR, AWD, MR)에 따른 차량 섀시 특성을 시뮬레이션해보고, 
+          오늘 배운 자동차 역사와 작동 원리를 5가지 마스터 퀴즈로 테스트해보세요!
+        </p>
+      </div>
+
+      <!-- Lab Mode Switcher Tabs -->
+      <div class="lab-tabs">
+        <button class="lab-tab-btn active" data-target="sandboxPane">🛠️ 구동방식(Drivetrain) 시뮬레이터</button>
+        <button class="lab-tab-btn" data-target="quizPane">🎓 자동차 상식 마스터 퀴즈</button>
+      </div>
+
+      <!-- PANE 1: Drivetrain Sandbox -->
+      <div class="lab-pane active" id="sandboxPane">
+        <div class="drivetrain-sandbox">
+          <div class="drive-options">
+            <button class="drive-opt-btn active" data-drive="ff">
+              FF 레이아웃
+              <span class="type">전륜구동 (앞 엔진 / 앞 바퀴)</span>
+            </button>
+            <button class="drive-opt-btn" data-drive="fr">
+              FR 레이아웃
+              <span class="type">후륜구동 (앞 엔진 / 뒷 바퀴)</span>
+            </button>
+            <button class="drive-opt-btn" data-drive="awd">
+              AWD / 4WD
+              <span class="type">사륜구동 (네 바퀴 동시 구동)</span>
+            </button>
+            <button class="drive-opt-btn" data-drive="mr">
+              MR / RR
+              <span class="type">미드십·리어 (슈퍼카 레이아웃)</span>
+            </button>
+          </div>
+
+          <div class="drive-display-card">
+            <!-- Chassis Visual -->
+            <div class="car-chassis-diagram">
+              <div class="chassis-wheel wheel-fl powered"></div>
+              <div class="chassis-wheel wheel-fr powered"></div>
+              <div class="chassis-engine-block engine-front" id="sandboxEngineBlock">엔진 (전방)</div>
+              <div class="chassis-wheel wheel-rl"></div>
+              <div class="chassis-wheel wheel-rr"></div>
+            </div>
+
+            <!-- Chassis Specs Description -->
+            <div class="drive-specs-info">
+              <h4 id="driveTitle">FF (Front-engine, Front-wheel drive / 전륜구동)</h4>
+              <p id="driveDesc">
+                현대 대다수 승용차의 표준 구동방식. 엔진과 변속기가 차량 앞쪽에 가로로 배치되어 앞바퀴로 동력을 전달하고 조향도 담당합니다.
+              </p>
+              <div class="drive-pros-cons">
+                <div class="pros-box">
+                  <h5>✓ 주요 장점</h5>
+                  <p id="drivePros">실내 및 트렁크 공간이 넓고 부품 수가 적어 가볍고 연비가 우수함. 눈길·빗길 접지력이 뛰어남.</p>
+                </div>
+                <div class="cons-box">
+                  <h5>✗ 한계 및 단점</h5>
+                  <p id="driveCons">앞바퀴가 조향과 구동을 동시에 감당하므로 급코너 시 코너 바깥으로 밀리는 언더스티어(Understeer) 발생 가능.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PANE 2: Interactive Quiz -->
+      <div class="lab-pane" id="quizPane">
+        <div class="quiz-container">
+          <div id="quizQuestionContainer">
+            <div class="quiz-header">
+              <span class="quiz-progress" id="quizCountBadge">문제 1 / 5</span>
+              <span style="font-size:0.85rem; color:var(--text-dim);">AUTOMOTIVE KNOWLEDGE TEST</span>
+            </div>
+            <div class="quiz-question-box">
+              <h3 id="quizQuestionTitle">1. 질문 내용이 여기에 표시됩니다.</h3>
+            </div>
+            <div class="quiz-options" id="quizOptionList">
+              <!-- Rendered via JS -->
+            </div>
+            <div class="quiz-feedback" id="quizFeedbackBox"></div>
+            <div style="text-align:right;">
+              <button class="quiz-next-btn" id="quizNextBtn" style="display:none;">다음 문제 ➔</button>
+            </div>
+          </div>
+
+          <!-- Quiz Result Card -->
+          <div class="quiz-result-card" id="quizResultCard">
+            <div class="quiz-result-badge">🏆</div>
+            <h3>모빌리티 엔지니어 퀴즈 완료!</h3>
+            <div class="quiz-score-num" id="quizResultScore">5 / 5 점</div>
+            <p style="color:var(--text-muted); max-width:480px; margin:0 auto 24px;">
+              축하합니다! 자동차의 140년 역사부터 4행정 엔진의 기계적 원리, 
+              전기차와 섀시 메커니즘을 훌륭하게 마스터하셨습니다.
+            </p>
+            <button class="btn-primary" id="quizRestartBtn">다시 풀기 ↺</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ----------------------------------------------------------------------
+       CHAPTER 07: 직접 주행 시뮬레이터 (DIRECT TRACK DRIVE SIMULATOR)
+       ---------------------------------------------------------------------- -->
+  <section class="drivesim-section" id="drivesim">
+    <div class="container drivesim-container">
+      <div class="section-header" style="margin-bottom: 30px;">
+        <div class="section-badge" style="background: rgba(255, 51, 102, 0.1); border-color: rgba(255, 51, 102, 0.3); color: var(--speed-red);">
+          CHAPTER 07 • DIRECT TRACK DRIVE SIMULATOR
+        </div>
+        <h2 class="section-title">직접 운전석에 올라 체감하는 주행 역학</h2>
+        <p class="section-desc">
+          키보드 방향키 또는 화면 버튼으로 가솔린 V8, 하이퍼 EV, 1886년 최초의 벤츠 삼륜차를 직접 조종해보세요.<br>
+          파워트레인에 따른 가속 리스폰스, 엔진 사운드, 변속비, 횡가속도(G-Force), 타이어 접지력(슬립 & 드리프트)의 차이를 온몸으로 체험할 수 있습니다.
+        </p>
+      </div>
+
+      <!-- Simulator Toolbar -->
+      <div class="drivesim-toolbar">
+        <div class="vehicle-selector-group">
+          <span class="sim-toolbar-label">차량 선택:</span>
+          <button class="vehicle-pill-btn active" data-veh="v8" id="vehBtnV8">
+            <span>🔥 V8 트윈터보 GT (가솔린 ICE)</span>
+          </button>
+          <button class="vehicle-pill-btn" data-veh="ev" id="vehBtnEV">
+            <span>⚡ 하이퍼 듀얼모터 (전기차 EV)</span>
+          </button>
+          <button class="vehicle-pill-btn" data-veh="benz" id="vehBtnBenz">
+            <span>🏛️ 1886 벤츠 모터바겐 (역사적 원조)</span>
+          </button>
+        </div>
+
+        <div class="sim-utility-controls">
+          <button class="btn-sim-action" id="simAssistBtn" style="border-color: var(--eco-green); background: rgba(16, 185, 129, 0.12); color: var(--eco-green);" title="운전 난이도 변경 (클릭하여 전환)">
+            <span>🛡️ 난이도: <strong id="assistModeLabel">초보자 이지 (EASY)</strong></span>
+          </button>
+          <button class="btn-sim-action" id="simSoundToggle">
+            <span id="soundIcon">🔇</span> <span id="soundLabel">사운드 켜기</span>
+          </button>
+          <button class="btn-sim-action" id="simGearModeBtn">
+            <span>⚙️ 변속: <strong id="gearModeLabel" style="color:var(--neon-cyan)">자동 (AUTO)</strong></span>
+          </button>
+          <button class="btn-sim-action" id="simResetBtn" title="차량 트랙 중앙으로 복귀">
+            <span>↺ 리셋</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Simulator Canvas & Cockpit HUD Viewport -->
+      <div class="sim-viewport-wrap">
+        <canvas id="driveCanvas"></canvas>
+
+        <!-- Cockpit HUD Overlay -->
+        <div class="cockpit-hud-overlay">
+          <!-- Top Bar -->
+          <div class="hud-top-bar">
+            <div class="hud-lap-badge">
+              <div class="hud-lap-title">CIRCUIT TELEMETRY</div>
+              <div class="hud-lap-time" id="simLapTime">LAP: 00:00.00</div>
+              <div style="font-size:0.75rem; color:var(--text-dim);" id="simBestLap">BEST: --:--.--</div>
+            </div>
+
+            <!-- Electronic Driving Aids Indicators -->
+            <div class="hud-assists-badges" id="hudAssistsGroup" style="display: flex; gap: 6px; align-items: center; flex-wrap: wrap;">
+              <span class="hud-pill" id="badgeESP" style="color: var(--eco-green); border-color: rgba(16, 185, 129, 0.4); font-size: 0.72rem;">ESP (자세제어) ON</span>
+              <span class="hud-pill" id="badgeTCS" style="color: var(--eco-green); border-color: rgba(16, 185, 129, 0.4); font-size: 0.72rem;">TCS (미끄럼방지) ON</span>
+              <span class="hud-pill" id="badgeABS" style="color: var(--eco-green); border-color: rgba(16, 185, 129, 0.4); font-size: 0.72rem;">ABS ON</span>
+              <span class="hud-pill" id="badgeSTEER" style="color: var(--neon-cyan); border-color: rgba(0, 240, 255, 0.4); font-size: 0.72rem;">조향 보조 ON</span>
+            </div>
+
+            <div class="hud-drift-badge" id="hudDriftBadge">
+              <div class="hud-drift-label">DRIFT SCORE</div>
+              <div class="hud-drift-pts" id="hudDriftPts">+0 PTS</div>
+            </div>
+
+            <!-- Minimap -->
+            <div class="hud-minimap-box">
+              <canvas id="minimapCanvas"></canvas>
+            </div>
+          </div>
+
+          <!-- Bottom Dashboard Cluster -->
+          <div class="hud-bottom-bar">
+            <!-- Left: G-Force Gauge -->
+            <div class="hud-gforce-box">
+              <div class="gforce-circle">
+                <div class="gforce-dot" id="gforceDot"></div>
+              </div>
+              <div class="gforce-info">
+                <div style="color:var(--text-dim); margin-bottom:2px;">G-FORCE</div>
+                <div>횡: <span class="gforce-val" id="latGVal">0.0 G</span></div>
+                <div>종: <span class="gforce-val" id="lonGVal">0.0 G</span></div>
+              </div>
+            </div>
+
+            <!-- Center: Speedometer & RPM & Shift Cluster -->
+            <div class="hud-cluster-center">
+              <div class="speed-digital-wrap">
+                <div class="speed-number" id="hudSpeedNum">0</div>
+                <div class="speed-unit">KM / H</div>
+              </div>
+
+              <div class="gear-display-box">
+                <div class="gear-label">GEAR</div>
+                <div class="gear-digit" id="hudGearDigit">N</div>
+                <div class="shift-light-bar">
+                  <div class="shift-led green" id="sLed1"></div>
+                  <div class="shift-led green" id="sLed2"></div>
+                  <div class="shift-led amber" id="sLed3"></div>
+                  <div class="shift-led amber" id="sLed4"></div>
+                  <div class="shift-led red" id="sLed5"></div>
+                </div>
+              </div>
+
+              <div class="tach-wrap">
+                <div class="tach-labels">
+                  <span>TACHOMETER</span>
+                  <span id="hudTachMax">8,000 RPM</span>
+                </div>
+                <div class="tach-bar-bg">
+                  <div class="tach-bar-fill" id="hudTachFill"></div>
+                </div>
+                <div class="tach-num-text" id="hudRpmText">0 RPM</div>
+              </div>
+            </div>
+
+            <!-- Right: Tire Grip & Traction Box -->
+            <div class="hud-tires-box">
+              <div class="tire-badge" id="tireFL">FL: 100%</div>
+              <div class="tire-badge" id="tireFR">FR: 100%</div>
+              <div class="tire-badge" id="tireRL">RL: 100%</div>
+              <div class="tire-badge" id="tireRR">RR: 100%</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Virtual Controls & Keyboard Guide -->
+      <div class="onscreen-controls-panel">
+        <div class="steering-control-group">
+          <button class="btn-virtual-ctrl" id="vBtnLeft">
+            <span>◀ 조향 (좌)</span>
+            <span class="keyhint">A / Left</span>
+          </button>
+          <button class="btn-virtual-ctrl" id="vBtnRight">
+            <span>조향 (우) ▶</span>
+            <span class="keyhint">D / Right</span>
+          </button>
+        </div>
+
+        <div class="keyboard-guide-center">
+          <div style="font-weight:700; color:#fff; margin-bottom:4px;">🎮 키보드 조작 가이드</div>
+          <div class="kb-row">
+            <span class="kb-key">↑ / W</span> 가속(엑셀)
+            <span class="kb-key">↓ / S</span> 브레이크/후진
+            <span class="kb-key">← / A</span> 좌회전
+            <span class="kb-key">→ / D</span> 우회전
+          </div>
+          <div class="kb-row">
+            <span class="kb-key">Space</span> 핸드브레이크(드리프트)
+            <span class="kb-key">E / Q</span> 변속(수동모드 시)
+            <span class="kb-key">R</span> 차량 리셋
+          </div>
+        </div>
+
+        <div class="pedals-control-group">
+          <button class="btn-virtual-ctrl btn-pedal-brake" id="vBtnBrake">
+            <span>🛑 브레이크</span>
+            <span class="keyhint">S / Down</span>
+          </button>
+          <button class="btn-virtual-ctrl btn-pedal-gas" id="vBtnGas">
+            <span>⚡ 가속 (GAS)</span>
+            <span class="keyhint">W / Up</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Vehicle Specs & Powertrain Profile Card -->
+      <div class="sim-vehicle-card" id="simVehCard">
+        <div class="sim-veh-info">
+          <h4 id="simCardTitle">V8 트윈터보 가솔린 GT (Twin-Turbo V8 ICE)</h4>
+          <p id="simCardDesc">
+            전형적인 고성능 프론트 미드십 FR 스포츠카. 7단 듀얼클러치 변속기(DCT)의 번개 같은 기어 체결, 
+            고회전 영역에서의 폭발적인 마력과 배기 사운드, 후륜구동 특유의 날카로운 오버스티어 드리프트를 즐길 수 있습니다.
+          </p>
+        </div>
+        <div class="sim-spec-pill">
+          <div class="sim-spec-label">최고출력 / 최대토크</div>
+          <div class="sim-spec-value" id="simCardPower">650 HP / 820 Nm</div>
+        </div>
+        <div class="sim-spec-pill">
+          <div class="sim-spec-label">0-100 km/h (제로백)</div>
+          <div class="sim-spec-value" id="simCardZero">3.2 초</div>
+        </div>
+        <div class="sim-spec-pill">
+          <div class="sim-spec-label">구동계 / 변속기</div>
+          <div class="sim-spec-value" id="simCardTrans">FR / 7단 DCT</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ----------------------------------------------------------------------
+       CHAPTER 08: 핵심 용어 사전 (GLOSSARY)
+       ---------------------------------------------------------------------- -->
+  <section class="glossary-section" id="glossary">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-badge">CHAPTER 08 • AUTOMOTIVE GLOSSARY</div>
+        <h2 class="section-title">자동차 핵심 엔지니어링 용어 사전</h2>
+        <p class="section-desc">토크, 마력, DOHC, 인버터 등 헷갈리기 쉬운 자동차 필수 용어를 실시간으로 검색해보세요.</p>
+      </div>
+
+      <!-- Live Search Box -->
+      <div class="glossary-search-wrap">
+        <span class="search-icon">🔍</span>
+        <input type="text" class="glossary-search-input" id="glossarySearchInput" placeholder="용어 검색 (예: 마력, 토크, DOHC, 회생제동, BMS...)">
+      </div>
+
+      <!-- Glossary Card Grid -->
+      <div class="glossary-grid" id="glossaryGrid">
+        <div class="glossary-card">
+          <div class="glossary-term">토크 (Torque)</div>
+          <div class="glossary-en">kgf·m / Nm (Newton-meter)</div>
+          <div class="glossary-def">물체를 회전시키는 순간적인 비틀림의 힘. 자동차가 정지 상태에서 출발하거나 가파른 언덕길을 치고 올라갈 때의 순간 펀치력을 결정합니다.</div>
+        </div>
+
+        <div class="glossary-card">
+          <div class="glossary-term">마력 (Horsepower)</div>
+          <div class="glossary-en">hp / ps (Pferdestärke)</div>
+          <div class="glossary-def">단위 시간당 수행할 수 있는 총 일의 양(토크 × 회전수). 토크가 순수한 '힘'이라면, 마력은 그 힘을 얼마나 빠른 속도로 지속해낼 수 있는지를 나타내는 최고 속도의 척도입니다.</div>
+        </div>
+
+        <div class="glossary-card">
+          <div class="glossary-term">RPM (Revolutions Per Minute)</div>
+          <div class="glossary-en">RPM</div>
+          <div class="glossary-def">엔진 크랭크축 또는 전기 모터 회전자가 1분 동안 몇 번 회전하는지를 나타내는 분당 회전 속도 단위입니다.</div>
+        </div>
+
+        <div class="glossary-card">
+          <div class="glossary-term">DOHC</div>
+          <div class="glossary-en">Double Overhead Camshaft</div>
+          <div class="glossary-def">실린더 헤드 윗부분에 2개의 캠축을 배치하여 흡기 밸브와 배기 밸브를 각각 분리 제어함으로써 고회전에서도 정밀한 연소 밸브 타이밍을 보장하는 구조입니다.</div>
+        </div>
+
+        <div class="glossary-card">
+          <div class="glossary-term">회생 제동 (Regenerative Braking)</div>
+          <div class="glossary-en">Regenerative Braking System</div>
+          <div class="glossary-def">가속 페달에서 발을 떼거나 브레이크를 밟을 때, 모터를 발전기로 역구동시켜 주행 운동 에너지를 전기로 회수하여 배터리를 충전하는 고효율 감속 기술입니다.</div>
+        </div>
+
+        <div class="glossary-card">
+          <div class="glossary-term">LFP vs NCM 배터리</div>
+          <div class="glossary-en">Lithium Iron Phosphate / Nickel Cobalt Manganese</div>
+          <div class="glossary-def">LFP는 인산철 기반으로 화재 안전성과 수명이 높고 저렴하며, NCM은 니켈-코발트-망간 삼원계로 에너지 밀도가 높아 1회 충전 주행거리가 더 긴 특징이 있습니다.</div>
+        </div>
+
+        <div class="glossary-card">
+          <div class="glossary-term">BMS (배터리 관리 시스템)</div>
+          <div class="glossary-en">Battery Management System</div>
+          <div class="glossary-def">전기차 배터리 팩 내부 수천 개 셀의 전압, 전류, 온도를 0.01초 단위로 측정하여 과충전·과방전을 방지하고 셀 간의 전압 균형(셀 밸런싱)을 유지하는 안전 핵심 장치입니다.</div>
+        </div>
+
+        <div class="glossary-card">
+          <div class="glossary-term">OTA (무선 소프트웨어 업데이트)</div>
+          <div class="glossary-en">Over-The-Air Update</div>
+          <div class="glossary-def">정비소를 방문하지 않고 스마트폰처럼 무선 셀룰러 통신망을 통해 차량 제어 소프트웨어, 인포테인먼트, 모터 출력 특성, 자율주행 맵 등을 원격 업데이트하는 기술입니다.</div>
+        </div>
+
+        <div class="glossary-card">
+          <div class="glossary-term">섀시 (Chassis)</div>
+          <div class="glossary-en">Automotive Chassis</div>
+          <div class="glossary-def">차체의 껍데기(바디)를 제외하고, 주행에 필요한 프레임, 엔진/모터, 서스펜션, 조향 장치, 제동 장치, 휠타이어 등 모든 핵심 구동 기계 부품이 결합된 기본 골격을 뜻합니다.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="logo">
+          <div class="logo-icon">⚙️</div>
+          <span>THE JOURNEY OF MOBILITY</span>
+        </div>
+        <ul class="footer-nav">
+          <li><a href="#hero">처음으로</a></li>
+          <li><a href="#history">역사</a></li>
+          <li><a href="#engine">4행정 엔진</a></li>
+          <li><a href="#powertrain">섀시</a></li>
+          <li><a href="#electric">전기차</a></li>
+          <li><a href="#lab">퀴즈</a></li>
+        </ul>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 The Mechanics of Mobility. 인류 모빌리티의 위대한 역사와 정교한 공학 원리를 기립니다.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Modal Dialog for Historical Anecdotes -->
+  <div class="modal-backdrop" id="historyModal">
+    <div class="modal-content">
+      <button class="modal-close-btn" id="modalCloseBtn" aria-label="닫기">✕</button>
+      <div class="modal-tag" id="modalTag">HISTORICAL ANECDOTE</div>
+      <h3 class="modal-title" id="modalTitle">역사적 비화</h3>
+      <div class="modal-body" id="modalBody">
+        상세 내용이 여기에 표시됩니다.
+      </div>
+    </div>
+  </div>
+
+  <!-- Script Execution -->
+  <script src="app.js"></script>
+</body>
+</html>
